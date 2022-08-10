@@ -24,10 +24,10 @@ const FooterStyle = styled.footer`
 const Footer = () => {
   return (
     <FooterStyle>
-      <div className="black-layer pt-5" id='footer'>
+      <div className="black-layer pt-5" id="footer">
         <div className="container">
           <div className="top">
-            <Grid container>
+            <Grid container gap={{ xs: 4, md: 0 }}>
               <Grid item xs={12} md={4} lg={4}>
                 <Twitter />
               </Grid>

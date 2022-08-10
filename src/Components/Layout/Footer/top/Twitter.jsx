@@ -13,6 +13,14 @@ const Div = styled.div`
       font-size: 14px;
       color: rgb(102, 102, 102);
       margin: 0px;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 5; /* number of lines to show */
+      line-clamp: 5;
+      -webkit-box-orient: vertical;
+      max-height: 9em;
+      line-height: 1.8em;
     }
     .icon {
       width: 50px;
@@ -30,8 +38,9 @@ const Twitter = () => {
           <li className="p-2">
             <div>
               <p>
-                ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و
-                متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است،
+                ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+                در ستون و سطرآنچنان که لازم است،
               </p>
               <p className="mt-1">Feb. 16, 2022</p>
             </div>
@@ -39,7 +48,10 @@ const Twitter = () => {
           </li>
           <li className="p-2">
             <div>
-              <p>ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،</p>
+              <p>
+                ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+                استفاده از طراحان گرافیک است،
+              </p>
               <p className="mt-1">Feb. 16, 2022</p>
             </div>
             <TwitterIcon className="icon mt-2" />

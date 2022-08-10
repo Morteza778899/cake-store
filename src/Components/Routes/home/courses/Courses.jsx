@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -16,16 +16,6 @@ const Div = styled.div`
     span.red {
       position: relative;
       color: #f2184f;
-      ::after {
-        position: absolute;
-        content: "";
-        height: 2px;
-        bottom: 2px;
-        right: 20px;
-        left: auto;
-        width: 80px;
-        background-color: #f2184f;
-      }
     }
     a {
       span.all {
@@ -41,12 +31,19 @@ const Div = styled.div`
       font-weight: 900;
     }
   }
+  @media (hover: none) {
+    input[type="checkbox"]:checked ~ .hover-container {
+      transform: rotateY(180deg);
+    }
+  }
   .cards {
     height: 300px;
     perspective: 1000px; //با این کد المنت در حال چرخش ارتفاع بیشتری پیدا میکند و قشنگ تر میشود
-    :hover {
-      .hover-container {
-        transform: rotateY(180deg);
+    @media (hover: hover) {
+      :hover {
+        .hover-container {
+          transform: rotateY(180deg);
+        }
       }
     }
     .hover-container {
@@ -82,6 +79,16 @@ const Div = styled.div`
             margin-top: auto;
             margin-bottom: auto;
             cursor: default;
+            h6 {
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 1; /* number of lines to show */
+              line-clamp: 1;
+              -webkit-box-orient: vertical;
+              max-height: 1.8em;
+              line-height: 1.8em;
+            }
           }
         }
         backface-visibility: hidden;
@@ -147,40 +154,54 @@ const Courses = () => {
             <span className="all">همه دوره‌ها</span>
           </Link>
         </Typography>
-        <Stack gap={2} direction={{ xs: "column", md: "row" }}>
+        <Grid container>
           {filterCourses.map((item) => (
-            <div className="cards col-lg mb-2 mb-lg-0" key={item._id}>
-              <div className="hover-container">
-                <div className="front">
-                  <div>
-                    <img
-                      src={`${config.toplearnapi}/${item.imageUrl}`}
-                      alt=""
-                    />
-                    <Button
-                      sx={{ opacity: 0.8 }}
-                      variant="contained"
-                      color="secondary"
-                      size="large"
-                    >
-                      <Typography variant="h6">{item.title}</Typography>
-                    </Button>
+            <Grid item xs={12} md={6} p={1} key={item._id}>
+              <label htmlFor={item._id} style={{ display: "unset" }}>
+                <div className="cards col-lg mb-2 mb-lg-0">
+                  <input
+                    type="checkbox"
+                    id={item._id}
+                    style={{ display: "none" }}
+                  ></input>
+                  <div className="hover-container">
+                    <div className="front">
+                      <div>
+                        <img
+                          src={`${config.toplearnapi}/${item.imageUrl}`}
+                          alt=""
+                        />
+                        <Button
+                          sx={{ opacity: 0.8, maxWidth: 0.8 }}
+                          variant="contained"
+                          color="secondary"
+                          size="large"
+                        >
+                          <label
+                            htmlFor={item._id}
+                            style={{ display: "unset" }}
+                          >
+                            <Typography variant="h6">{item.title}</Typography>
+                          </label>
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="back">
+                      <h3>{item.title}</h3>
+                      <p>{item.info}</p>
+                      <Button
+                        variant="contained"
+                        onClick={() => navigate(`/course/${item._id}`)}
+                      >
+                        شرکت در دوره
+                      </Button>
+                    </div>
                   </div>
                 </div>
-                <div className="back">
-                  <h3>{item.title}</h3>
-                  <p>{item.info}</p>
-                  <Button
-                    variant="contained"
-                    onClick={() => navigate(`/course/${item._id}`)}
-                  >
-                    شرکت در دوره
-                  </Button>
-                </div>
-              </div>
-            </div>
+              </label>
+            </Grid>
           ))}
-        </Stack>
+        </Grid>
       </div>
     </Div>
   );

@@ -75,7 +75,6 @@ const NavList = ({ openHandler, location }) => {
           >
             درباره ما
           </li>
-          <li className="list-inline-item m-0">اساتید</li>
           <li className="list-inline-item m-0">گالری</li>
           <li className="list-inline-item m-0">وبلاگ</li>
           <li

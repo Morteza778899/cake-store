@@ -68,6 +68,9 @@ const Div = styled.div`
             overflow: hidden;
           }
           h2 {
+            @media screen and (min-width: 1300px) {
+                font-size: 28px;
+            }
             background-color: #00000099;
             font-size: 2.6vw;
             padding: 5px;
@@ -78,6 +81,9 @@ const Div = styled.div`
             box-shadow: -4px 0px #f2184f, 4px 0px #f2184f;
           }
           h1 {
+            @media screen and (min-width: 1300px) {
+                font-size: 48px;
+            }
             font-size: 4vw;
             margin: 10px;
             padding: 5px;
@@ -86,11 +92,17 @@ const Div = styled.div`
             border-radius: 40px;
           }
           p {
+            @media screen and (min-width: 1300px) {
+                font-size: 22px;
+            }
             font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
+            @media screen and (min-width: 1300px) {
+                font-size: 18px;
+            }
             font-size: 1.8vw;
             padding: 3px;
             padding-inline: 15px;
@@ -113,11 +125,17 @@ const Div = styled.div`
             display: grid;
           }
           h2 {
+            @media screen and (min-width: 1300px) {
+                font-size: 100px;
+            }
             font-size: 8vw;
             direction: ltr;
             margin-bottom: 0px;
           }
           h3 {
+            @media screen and (min-width: 1300px) {
+                font-size: 35px;
+            }
             justify-self: left;
             align-self: center;
             font-size: 3vw;
@@ -130,11 +148,17 @@ const Div = styled.div`
             margin-bottom: 10px;
           }
           p {
+            @media screen and (min-width: 1300px) {
+                font-size: 22px;
+            }
             font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
+            @media screen and (min-width: 1300px) {
+                font-size: 18px;
+            }
             width: fit-content;
             justify-self: left;
             align-self: center;
@@ -161,13 +185,19 @@ const Div = styled.div`
             overflow: hidden;
           }
           h2 {
+            @media screen and (min-width: 1300px) {
+                font-size: 64px;
+            }
             font-size: 5vw;
             background-color: #202c45c8;
-            margin-bottom: 5px; 
+            margin-bottom: 5px;
             padding-inline: 20px;
             border-right: 5px solid #f2184f;
           }
           h3 {
+            @media screen and (min-width: 1300px) {
+                font-size: 32px;
+            }
             font-size: 3vw;
             background-color: #000000a0;
             width: fit-content;
@@ -176,11 +206,17 @@ const Div = styled.div`
             margin-bottom: 5px;
           }
           p {
+            @media screen and (min-width: 1300px) {
+                font-size: 22px;
+            }
             font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
+            @media screen and (min-width: 1300px) {
+                font-size: 18px;
+            }
             font-size: 1.8vw;
             margin-top: 10px;
             background-color: #202c45c8;

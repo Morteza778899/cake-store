@@ -30,10 +30,8 @@ const HomePage = () => {
       </Helmet>
       <main>
         <NavHeader location={location} />
-        <Section>
           <Slider />
           <Courses />
-        </Section>
         <AboutUs />
       </main>
     </div>
