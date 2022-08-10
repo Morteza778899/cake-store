@@ -15,20 +15,23 @@ const SingleCourse = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
-  useEffect(async () => {
-    setLoading(true);
-    try {
-      const { data } = await getSingleCourseService(params.id);
-      dispatch(getSingleCourse(data.course));
-      setLoading(false);
-    } catch (error) {
-      // در سمت سرور درست بودن آیدی ارسالی باید چک شود
-      // و اگر همچنین آیدی برای دوره ای نبود اینجا ارور ها را هندل کنیم
-      // و از آنجایی که همچین اروری در سرور پیش بینی نشده بود
-      //  خطای 500 میدهد و توست مشکلی از سمت سرور است میاید
-      navigation("/404", { replace: true });
-      setLoading(false);
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const { data } = await getSingleCourseService(params.id);
+        dispatch(getSingleCourse(data.course));
+        setLoading(false);
+      } catch (error) {
+        // در سمت سرور درست بودن آیدی ارسالی باید چک شود
+        // و اگر همچنین آیدی برای دوره ای نبود اینجا ارور ها را هندل کنیم
+        // و از آنجایی که همچین اروری در سرور پیش بینی نشده بود
+        //  خطای 500 میدهد و توست مشکلی از سمت سرور است میاید
+        navigation("/404", { replace: true });
+        setLoading(false);
+      }
     }
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -37,6 +40,7 @@ const SingleCourse = () => {
       left: 0,
     });
   }, []);
+  
   return (
     <>
       {loading ? (

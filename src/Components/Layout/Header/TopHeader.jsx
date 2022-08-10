@@ -3,17 +3,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import GoogleIcon from "@mui/icons-material/Google";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import styled from "styled-components";
 import { useState } from "react";
-import BoxShop from "./BoxShop";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Stack } from "@mui/material";
 const Div = styled.div`
   width: 100%;
-  height: 40px;
   background-color: #f2184f;
   ul.social-media {
     direction: rtl;
@@ -28,24 +25,6 @@ const Div = styled.div`
     }
   }
   .search-user {
-    input.text-for-search {
-      width: 220px;
-      height: 25px;
-      direction: rtl;
-      font-size: 18px;
-      padding-inline: 5px;
-      background-color: rgb(255, 254, 254, 0.5);
-      color: #cecece;
-      border: none;
-      border-bottom: 2px solid white;
-      opacity: 0.5;
-      transition: all 0.2s;
-      :focus {
-        outline: none;
-        border-bottom: 2px solid aqua;
-        opacity: 1;
-      }
-    }
     .media-icon {
       color: white;
       width: 20px;
@@ -93,7 +72,13 @@ const TopHeader = () => {
     <>
       <Div className="top-header">
         <div className="h-100 container">
-          <div className="h-100 d-flex justify-content-between align-items-center">
+          <Stack
+            sx={{ py: 1 }}
+            gap={2}
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <ul className="social-media list-inline m-0">
               <li className="list-inline-item ">
                 <a>
@@ -122,9 +107,6 @@ const TopHeader = () => {
               </li>
             </ul>
             <div className="h-100 search-user d-flex align-items-center">
-              <input className="text-for-search" type="text" />
-              <SearchIcon className="media-icon mx-1 ms-3" />
-
               {user.userId ? (
                 <>
                   <NavLink to="/logout" className="log text-decoration-none">
@@ -133,13 +115,19 @@ const TopHeader = () => {
                   {user.isAdmin && (
                     <>
                       <span className="text-white mx-1">|</span>
-                      <NavLink to="/dashboard" className="user-name text-decoration-none">
+                      <NavLink
+                        to="/dashboard"
+                        className="user-name text-decoration-none"
+                      >
                         داشبورد
                       </NavLink>
                     </>
                   )}
                   <span className="text-white mx-1">|</span>
-                  <NavLink to="/profile" className="user-name text-decoration-none">
+                  <NavLink
+                    to="/profile"
+                    className="user-name text-decoration-none"
+                  >
                     {user.fullname}
                   </NavLink>
                 </>
@@ -149,28 +137,18 @@ const TopHeader = () => {
                     ثبت نام
                   </NavLink>
                   <span className="text-white mx-1">|</span>
-                  <NavLink to="/login" className="user-name text-decoration-none">
+                  <NavLink
+                    to="/login"
+                    className="user-name text-decoration-none"
+                  >
                     ورود
                   </NavLink>
                 </>
               )}
 
               <AccountCircleIcon className="media-icon mx-1" />
-
-              <div
-                className="shop-container"
-                onMouseEnter={() => setShopHidden(true)}
-                onMouseLeave={() => setShopHidden(false)}
-              >
-                <LocalGroceryStoreIcon className="media-icon shop-icon mx-1" />
-                {shopHidden ? (
-                  <div className="box-shop">
-                    <BoxShop />
-                  </div>
-                ) : null}
-              </div>
             </div>
-          </div>
+          </Stack>
         </div>
       </Div>
     </>

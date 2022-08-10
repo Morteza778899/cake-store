@@ -1,10 +1,29 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Sticky from "react-sticky-el";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  useMediaQuery,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import NavList from "./NavList";
 
 const Div = styled.div`
-  height: 70px;
   background-color: #202c45;
+  h6 {
+    margin: 0;
+    color: white;
+    font-weight: 900;
+    letter-spacing: ${(props) => (props.open ? "2px" : "0")};
+    transition: 0.5s all;
+  }
+  svg {
+    margin-inline: 5px;
+  }
   nav {
     ul {
       direction: rtl;
@@ -13,7 +32,7 @@ const Div = styled.div`
         cursor: pointer;
         width: max-content;
         padding: 5px;
-        padding-inline: 15px;
+        padding-inline: 10px;
         border-radius: 30px;
         font-size: 15px;
         color: white;
@@ -30,58 +49,56 @@ const Div = styled.div`
           color: #202c45;
         }
         transition: all 0.5s;
+        a {
+          color: unset;
+          text-decoration: unset;
+        }
       }
     }
   }
 `;
 
-const NavHeader = () => {
-  const [navStatus, setNavStatus] = useState("home");
-
-  useEffect(() => {
-    window.addEventListener("scroll", updateScroll);
-    return () => {
-      window.removeEventListener("scroll", updateScroll);
-    };
-  }, []);
-
-  const updateScroll = () => {
-    let scr = Math.floor(window.scrollY / 100);
-    if (scr < 8) {
-      setNavStatus("home");
-    } else if (scr > 7 && scr < 14) {
-      setNavStatus("aboutUs");
-    } else if (scr > 13) {
-      setNavStatus("courses");
-    }
+const NavHeader = ({ location }) => {
+  const [open, setOpen] = useState(false);
+  const smWidth = useMediaQuery("(min-width:600px)");
+  
+  const openHandler = (bool) => {
+    setOpen(bool);
   };
-  const handler = (y) => {
-    window.scroll({
-      top: y,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
+
   return (
     <Sticky stickyStyle={{ zIndex: "1000" }} mode={"top"}>
-      <Div>
-        <nav className="navbar h-100 container d-flex justify-content-end align-items-center">
-          <ul className="list-inline m-0">
-            <li className={`list-inline-item m-0 ${navStatus === "home" && "active"}`} onClick={() => handler(0)}>
-              خانه
-            </li>
-            <li className={`list-inline-item m-0 ${navStatus === "aboutUs" && "active"}`} onClick={() => handler(1000)}>
-              درباره ما
-            </li>
-            <li className={`list-inline-item m-0 ${navStatus === "courses" && "active"}`} onClick={() => handler(1550)}>
-              دوره ها
-            </li>
-            <li className="list-inline-item m-0">اساتید</li>
-            <li className="list-inline-item m-0">گالری</li>
-            <li className="list-inline-item m-0">وبلاگ</li>
-            <li className="list-inline-item m-0">تماس با ما</li>
-          </ul>
-        </nav>
+      <Div open={open}>
+        {smWidth ? (
+          <Box sx={{ py: 2.5 }}>
+            <NavList
+              openHandler={openHandler}
+              location={location}
+            />
+          </Box>
+        ) : (
+          <Accordion expanded={open} square={true} sx={{ bgcolor: "#202c45" }}>
+            <AccordionSummary
+              sx={{ width: "fit-content", mx: "auto" }}
+              onClick={() => setOpen(!open)}
+              expandIcon={
+                open ? (
+                  <CloseIcon sx={{ color: "white", mx: 6 }} />
+                ) : (
+                  <MenuIcon sx={{ color: "white", mx: 6 }} />
+                )
+              }
+            >
+              <h6>دسترسی سریع</h6>
+            </AccordionSummary>
+            <AccordionDetails>
+              <NavList
+                openHandler={openHandler}
+                location={location}
+              />
+            </AccordionDetails>
+          </Accordion>
+        )}
       </Div>
     </Sticky>
   );

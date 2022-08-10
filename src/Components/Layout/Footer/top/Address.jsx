@@ -1,8 +1,15 @@
 import styled from "styled-components";
-import logo from "../../../../images/logo-white-footer.htm";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import GoogleIcon from "@mui/icons-material/Google";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import FacebookIcon from "@mui/icons-material/Facebook";
 const Div = styled.div`
   img {
     width: fit-content;
+  }
+  h4 {
+    text-align: center;
   }
   div {
     display: flex;
@@ -16,12 +23,26 @@ const Div = styled.div`
       margin: 0px;
     }
   }
+  .connect-us {
+    .media-icon {
+      cursor: pointer;
+      color: rgb(102, 102, 102);
+      padding: 3px;
+      outline: 1px solid rgb(102, 102, 102);
+      outline-offset: 2px;
+      :hover {
+        color: white;
+        background-color: rgba(102, 102, 102, 0.849);
+      }
+      transition: all 0.5s;
+    }
+  }
 `;
 
 const Address = () => {
   return (
-    <Div className="col d-flex flex-column">
-      <img src={logo} alt="for logo" className="align-self-end" />
+    <Div className="col d-flex flex-column p-4">
+      <h4>راه‌های ارتباطی</h4>
       <p style={{ color: "#666666" }} className="my-3">
         ایران، تهران، میدان آزادی، کنار برج میلاد، خیابان امام حسین
       </p>
@@ -36,6 +57,15 @@ const Address = () => {
       <div className="my-1">
         <span className="icon-globe"></span>
         <p className="ms-2">www.mywebsite.com</p>
+      </div>
+      <div className="connect-us my-1">
+        <div className="icons">
+          <LinkedInIcon className="media-icon m-2" />
+          <InstagramIcon className="media-icon m-2" />
+          <GoogleIcon className="media-icon m-2" />
+          <TwitterIcon className="media-icon m-2" />
+          <FacebookIcon className="media-icon m-2" />
+        </div>
       </div>
     </Div>
   );

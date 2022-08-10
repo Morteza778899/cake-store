@@ -11,7 +11,7 @@ import { loadingHandler } from "./loadingAction";
 
 export const getCourses = () => {
   return async (dispatch) => {
-    await dispatch(loadingHandler(true));
+    // await dispatch(loadingHandler(true));
     const { data } = await getCoursesService();
     await dispatch({ type: "GET_COURSES", payload: data.courses });
     await dispatch(loadingHandler(false));

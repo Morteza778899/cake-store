@@ -9,7 +9,6 @@ import Login from "./Components/Routes/login/Login";
 import Logout from "./Components/Routes/logout/Logout";
 import Register from "./Components/Routes/register/Register";
 import ClipLoader from "react-spinners/ClipLoader";
-import AllCourses from "./Components/Routes/courses/AllCourses";
 import SingleCourse from "./Components/Routes/course/SingleCourse";
 import jwt from "jsonwebtoken";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
@@ -58,7 +57,6 @@ const App = () => {
                 <Route path="/login" element={user.userId ? <Navigate to="/" replace="true" /> : <Login />} />
                 <Route path="/logout" element={!user.userId ? <Navigate to="/" replace="true" /> : <Logout />} />
                 <Route path="/register" element={user.userId ? <Navigate to="/" replace="true" /> : <Register />} />
-                <Route path="/courses" element={<AllCourses />} />
                 <Route path="/course/:id" element={<SingleCourse />} />
                 <Route
                   path="/dashboard"

@@ -18,6 +18,11 @@ html:root {
   scroll-behavior: unset;
 }
 
+a {
+  text-decoration: none !important;
+  color: unset !important;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('../fonts/icomoon.eot?sb83s2');

@@ -12,7 +12,8 @@ import Progress from "./Progress";
 const Div = styled.div`
   position: relative;
   width: 100%;
-  height: 620px;
+  height: 65vw;
+  max-height: 620px;
   /* overflow: hidden; */
   .swiper {
     width: 100%;
@@ -68,16 +69,16 @@ const Div = styled.div`
           }
           h2 {
             background-color: #00000099;
-            font-size: 26px;
-            width: 350px;
+            font-size: 2.6vw;
             padding: 5px;
+            padding-inline: 20px;
             margin-inline: 5px;
             text-align: center;
             border-radius: 30px;
             box-shadow: -4px 0px #f2184f, 4px 0px #f2184f;
           }
           h1 {
-            font-size: 40px;
+            font-size: 4vw;
             margin: 10px;
             padding: 5px;
             padding-inline: 30px;
@@ -85,11 +86,12 @@ const Div = styled.div`
             border-radius: 40px;
           }
           p {
+            font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
-            font-size: 16px;
+            font-size: 1.8vw;
             padding: 3px;
             padding-inline: 15px;
             margin: 10px;
@@ -111,14 +113,14 @@ const Div = styled.div`
             display: grid;
           }
           h2 {
-            font-size: 80px;
+            font-size: 8vw;
             direction: ltr;
             margin-bottom: 0px;
           }
           h3 {
             justify-self: left;
             align-self: center;
-            font-size: 30px;
+            font-size: 3vw;
             direction: ltr;
             background-color: #202c45c8;
             width: fit-content;
@@ -128,6 +130,7 @@ const Div = styled.div`
             margin-bottom: 10px;
           }
           p {
+            font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
@@ -135,7 +138,7 @@ const Div = styled.div`
             width: fit-content;
             justify-self: left;
             align-self: center;
-            font-size: 16px;
+            font-size: 1.8vw;
             margin-top: 10px;
             background-color: #202c45c8;
             border: none;
@@ -158,14 +161,14 @@ const Div = styled.div`
             overflow: hidden;
           }
           h2 {
-            font-size: 50px;
+            font-size: 5vw;
             background-color: #202c45c8;
             margin-bottom: 5px; 
             padding-inline: 20px;
             border-right: 5px solid #f2184f;
           }
           h3 {
-            font-size: 30px;
+            font-size: 3vw;
             background-color: #000000a0;
             width: fit-content;
             padding: 5px;
@@ -173,11 +176,12 @@ const Div = styled.div`
             margin-bottom: 5px;
           }
           p {
+            font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
-            font-size: 16px;
+            font-size: 1.8vw;
             margin-top: 10px;
             background-color: #202c45c8;
             border: none;

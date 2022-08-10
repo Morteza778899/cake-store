@@ -5,14 +5,11 @@ import image from "../../../images/bg2.jpg";
 import Address from "./top/Address";
 import UsefulLink from "./top/UsefulLink";
 import Twitter from "./top/Twitter";
-import Hours from "./top/Hours";
 
-
-import Middle from "./middle/Middle";
+import { Grid } from "@mui/material";
 
 const FooterStyle = styled.footer`
   background: url(${image});
-  height: 600px;
   margin-top: 50px;
   color: white;
   .black-layer {
@@ -22,27 +19,25 @@ const FooterStyle = styled.footer`
     height: 100%;
     background-color: #000000d1;
   }
-  .middle {
-    border-top: 1px solid #8d8d8d40;
-  }
-  
 `;
 
 const Footer = () => {
   return (
     <FooterStyle>
-      <div className="black-layer pt-5">
+      <div className="black-layer pt-5" id='footer'>
         <div className="container">
           <div className="top">
-            <div className="row">
-              <Hours />
-              <Twitter />
-              <UsefulLink />
-              <Address />
-            </div>
-          </div>
-          <div className="middle my-5 py-5">
-            <Middle />
+            <Grid container>
+              <Grid item xs={12} md={4} lg={4}>
+                <Twitter />
+              </Grid>
+              <Grid item xs={12} md={4} lg={4}>
+                <UsefulLink />
+              </Grid>
+              <Grid item xs={12} md={4} lg={4}>
+                <Address />
+              </Grid>
+            </Grid>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ const Div = styled.div`
 
 const UsefulLink = () => {
   return (
-    <Div className="col link">
+    <Div className="col link my-5">
       <h4>لینک‌های مفید</h4>
       <ul className="list-unstyled p-1">
         <li>
