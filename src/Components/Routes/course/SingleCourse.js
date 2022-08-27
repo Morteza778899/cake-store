@@ -7,13 +7,15 @@ import styled from "styled-components";
 import ContentCourse from "./ContentCourse";
 import DetailsCourse from "./DetailsCourse";
 import { getSingleCourseService } from "../../../services/courseService";
-const Div = styled.div``;
+import { Box, Grid, Stack, useMediaQuery } from "@mui/material";
+
 const SingleCourse = () => {
   const [loading, setLoading] = useState(false);
   const course = useSelector((state) => state.course);
   const params = useParams();
   const dispatch = useDispatch();
   const navigation = useNavigate();
+  const mdWidth = useMediaQuery("(min-width:1000px)");
 
   useEffect(() => {
     async function fetchData() {
@@ -40,7 +42,7 @@ const SingleCourse = () => {
       left: 0,
     });
   }, []);
-  
+
   return (
     <>
       {loading ? (
@@ -56,16 +58,22 @@ const SingleCourse = () => {
           <ClipLoader color={"#202c45"} size={80} />
         </div>
       ) : (
-        <Div className="container ">
-          <div className="row mx-5 mt-5">
-            <div className="col-8 ">
-              <ContentCourse course={course} />
-            </div>
-            <div className="col-4">
+        <Box
+          sx={{
+            maxWidth: 1400,
+            mx: "auto",
+            px: { xs: 0, sm: 2, md: 4, lg: 6 },
+          }}
+        >
+          <Grid container>
+            <Grid item xs={mdWidth ? 4 : 12} p={2}>
               <DetailsCourse course={course} />
-            </div>
-          </div>
-        </Div>
+            </Grid>
+            <Grid item xs={mdWidth ? 8 : 12} p={2}>
+              <ContentCourse course={course} />
+            </Grid>
+          </Grid>
+        </Box>
       )}
     </>
   );

@@ -1,5 +1,7 @@
+import { Typography } from "@mui/material";
 import styled from "styled-components";
 import config from "../../../services/config.json";
+import EpisodeCourse from "./EpisodeCourse";
 
 const Div = styled.div`
     box-shadow: 0 0 7px 0 #eaeff4;
@@ -10,10 +12,10 @@ const Div = styled.div`
 const ContentCourse = ({course}) => {
   return (
     <Div className='p-4'>
-      <img src={`${config.toplearnapi}/${course.imageUrl}`} className="w-100 mb-4" />
-      <h2>{course.title}</h2>
-      <p>{course.info}</p>
-      <p>
+      <img src={`${config.toplearnapi}/${course.imageUrl}`} className="w-100 mb-4" alt=''/>
+      <Typography variant='h3' textAlign='center' m={2}>{course.title}</Typography>
+      <Typography sx={{p:{xs:0,sm:2},textAlign:'justify'}}>
+      {course.info}
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون
         بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با
         هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و
@@ -21,7 +23,10 @@ const ContentCourse = ({course}) => {
         پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط
         سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود
         طراحی اساسا مورد استفاده قرار گیرد.
-      </p>
+      </Typography>
+
+      <EpisodeCourse/>
+
     </Div>
   );
 };
