@@ -7,7 +7,6 @@ import MainLayout from "./Components/Layout/MainLayout";
 import HomePage from "./Components/Routes/home/HomePage";
 import Login from "./Components/Routes/login/Login";
 import Logout from "./Components/Routes/logout/Logout";
-import Register from "./Components/Routes/register/Register";
 import ClipLoader from "react-spinners/ClipLoader";
 import SingleCourse from "./Components/Routes/course/SingleCourse";
 import jwt from "jsonwebtoken";
@@ -24,13 +23,7 @@ const App = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const decodeToken = jwt.decode(token, { complete: true });
-      const dateNow = Date.now() / 1000;
-      if (decodeToken.payload.exp < dateNow) {
-        localStorage.removeItem("token");
-        dispatch(clearUser());
-      } else {
         dispatch(setUser(decodeToken.payload.user));
-      }
     }
   }, []);
 
@@ -56,7 +49,6 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={user.userId ? <Navigate to="/" replace="true" /> : <Login />} />
                 <Route path="/logout" element={!user.userId ? <Navigate to="/" replace="true" /> : <Logout />} />
-                <Route path="/register" element={user.userId ? <Navigate to="/" replace="true" /> : <Register />} />
                 <Route path="/course/:id" element={<SingleCourse />} />
                 <Route
                   path="/dashboard"
