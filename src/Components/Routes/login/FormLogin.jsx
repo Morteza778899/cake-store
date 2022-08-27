@@ -1,4 +1,4 @@
-const FormLogin = ({ email, setEmail, password, setPassword, validator, loginHandler }) => {
+const FormLogin = ({ phone, setPhone, validator, loginHandler }) => {
   return (
     <main className="client-page">
       <div className="container-content">
@@ -11,46 +11,17 @@ const FormLogin = ({ email, setEmail, password, setPassword, validator, loginHan
             <div className="my-2">
               <input
                 type="text"
-                name="email"
+                name="phone"
                 class="form-control"
-                placeholder="ایمیل"
+                placeholder="شماره همراه"
                 aria-describedby="email-address"
-                value={email}
+                value={phone}
                 onChange={(e) => {
-                  setEmail(e.target.value);
-                  validator.current.showMessageFor("email");
+                  setPhone(e.target.value);
+                  validator.current.showMessageFor("phone");
                 }}
               />
-              {validator.current.message("email", email, "required|email")}
-            </div>
-
-            <div classNames="my-2">
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                placeholder="رمز عبور "
-                aria-describedby="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  validator.current.showMessageFor("password");
-                }}
-              />
-              {validator.current.message("password", password, "required|min:5")}
-            </div>
-
-            <div className="remember-me">
-              <label>
-                <input type="checkbox" name="" /> مرا بخاطر بسپار{" "}
-              </label>
-            </div>
-
-            <div className="link">
-              <a href="">
-                {" "}
-                <i className="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام !
-              </a>
+              {validator.current.message("phone", phone, "required|min:11|max:11")}
             </div>
 
             <button className="btn btn-success"> ورود به سایت </button>

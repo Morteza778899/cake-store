@@ -10,8 +10,7 @@ import { setUser } from "../../../Redux/Action/userAction";
 import { toastUpdate } from "../../utils/toast";
 import FormLogin from "./FormLogin";
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigate();
   // Validation Form
@@ -19,10 +18,14 @@ const Login = () => {
     new SimpleReactValidator({
       messages: {
         required: "پر کردن این فیلد الزامی میباشد",
-        email: "ایمیل وارد شده صحیح نیست",
-        min: "کتر از 5 کاراکتر نباید باشد",
+        min: "کمتر از 11 کاراکتر نباید باشد",
+        max: "بیشتر از 11 کاراکتر نباید باشد",
       },
-      element: (message) => <div style={{ color: "red" }} className='form-text'>{message}</div>,
+      element: (message) => (
+        <div style={{ color: "red" }} className="form-text">
+          {message}
+        </div>
+      ),
     })
   );
   const [, forceUpdate] = useState();
@@ -30,28 +33,22 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
     const load = toast.loading("در حال بارگیری اطلاعات");
-    const user = {
-      email,
-      password,
-    };
     try {
       if (validator.current.allValid()) {
-        const { status, data } = await loginUser(user);
-        if (status === 200) {
-          localStorage.setItem("token", data.token);
-          const decodeToken = jwt.decode(data.token, { complete: true });
-          dispatch(setUser(decodeToken.payload.user));
-          toastUpdate(load, "success", "ورود موفقیت آمیز بود");
-          navigation("/", { replace: true });
-        }
+        const { data } = await loginUser(phone);
+        localStorage.setItem("token", data.token);
+        const decodeToken = jwt.decode(data.token, { complete: true });
+        dispatch(setUser(decodeToken.payload.user));
+        toastUpdate(load, "success", "ورود موفقیت آمیز بود");
+        navigation("/", { replace: true });
       } else {
         validator.current.showMessages();
         forceUpdate(1);
         toastUpdate(load, "error", "اعتبار سنجی فیلد ها رعایت نشده");
       }
     } catch (err) {
-      console.log(err);
-      toastUpdate(load, "error", "مشکلی پیش آمده");
+      console.log(err.response.data);
+      toastUpdate(load, "error", err.response.data.message);
     }
   };
 
@@ -61,10 +58,8 @@ const Login = () => {
         <title>سایت فروشگاهی | ورود به سایت</title>
       </Helmet>
       <FormLogin
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
+        phone={phone}
+        setPhone={setPhone}
         validator={validator}
         loginHandler={loginHandler}
       />
