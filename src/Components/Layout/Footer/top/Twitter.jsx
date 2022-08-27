@@ -1,4 +1,5 @@
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { useMediaQuery } from "@mui/material";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -30,11 +31,13 @@ const Div = styled.div`
 `;
 
 const Twitter = () => {
+  const mdWidth = useMediaQuery("(min-width:900px)");
+
   return (
     <Div className="col twitter">
       <h4>جدیدترین توییت‌ها</h4>
       <div className="twitter-feed">
-        <ul>
+        <ul style={{ paddingRight: `${mdWidth ? "1rem" : "0px"}` }}>
           <li className="p-2">
             <div>
               <p>

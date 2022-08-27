@@ -1,22 +1,30 @@
-import http from './httpSevice'
 import config from './config.json'
+import { http } from './httpSevice'
 
 export const getCoursesService = ()=>{
-    return http.get(`${config.toplearnapi}/api/courses`)
+    return http.get(`${config.toplearnapi}/get-courses`)
 }
 
 export const getSingleCourseService = (id)=>{
-    return http.get(`${config.toplearnapi}/api/course/${id}`)
+    return http.get(`${config.toplearnapi}/get-single-course/${id}`)
+}
+
+export const getUrlVideoService = (data)=>{  // data --> key:filename , courseId
+    return http.post(`${config.toplearnapi}/get-video`,data)
 }
 
 export const addCourseService = course =>{
-    return http.post(`${config.toplearnapi}/api/course`,course)
+    return http.post(`${config.toplearnapi}/dashboard/add-course`,course)
+}
+
+export const editCourseService = (id,course) =>{
+    return http.put(`${config.toplearnapi}/dashboard/edit-course/${id}`,course)
 }
 
 export const deleteCourseService = id =>{
-    return http.delete(`${config.toplearnapi}/api/course/${id}`)
+    return http.delete(`${config.toplearnapi}/dashboard/delete-course/${id}`)
 }
 
-export const updateCourseService = (id,course) =>{
-    return http.put(`${config.toplearnapi}/api/course/${id}`,course)
+export const uploadVideoService = (id,video) =>{
+    return http.post(`${config.toplearnapi}/dashboard/upload-video/${id}`)
 }

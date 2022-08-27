@@ -1,19 +1,25 @@
-import { filter } from "lodash";
 import { toast } from "react-toastify";
 import { toastUpdate } from "../../Components/utils/toast";
 import {
   addCourseService,
   deleteCourseService,
   getCoursesService,
-  updateCourseService,
+  editCourseService,
 } from "../../services/courseService";
 import { loadingHandler } from "./loadingAction";
 
 export const getCourses = () => {
   return async (dispatch) => {
-    // await dispatch(loadingHandler(true));
-    const { data } = await getCoursesService();
-    await dispatch({ type: "GET_COURSES", payload: data.courses });
+    await dispatch(loadingHandler(true));
+    try {
+      const {data} = await getCoursesService();
+      await dispatch({ type: "GET_COURSES", payload: data.courses });
+    } catch (error) { 
+      toast.error(error.response.data.message, {
+        position: "top-left",
+        closeOnClick: true,
+      });
+    }
     await dispatch(loadingHandler(false));
   };
 };
@@ -50,7 +56,7 @@ export const updateCourse = (id, courseUpdated) => {
     let courses = getstate().courses;
     let courseIndex = courses.findIndex((value) => value._id == id);
     try {
-      const { data, status } = await updateCourseService(id, courseUpdated);
+      const { data, status } = await editCourseService(id, courseUpdated);
       if (status == 200) {
         courses[courseIndex] = { ...data.course };
         await dispatch({ type: "UPDATE_COURSE", payload: courses });

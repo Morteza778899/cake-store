@@ -143,7 +143,6 @@ const Div = styled.div`
 
 const Courses = () => {
   const courses = useSelector((state) => state.courses);
-  let filterCourses = courses.slice(-2);
   const navigate = useNavigate();
   return (
     <Div className="card-detail" id="courses">
@@ -155,7 +154,12 @@ const Courses = () => {
           </Link>
         </Typography>
         <Grid container>
-          {filterCourses.map((item) => (
+          {
+            courses.length===0 && (
+              <Typography variant='subtitle1' width={1} textAlign='center'>تاکنون هیچ دوره ای در پایگاه داده ثبت نشده است</Typography>
+            )
+          }
+          {courses.map((item) => (
             <Grid item xs={12} md={6} p={1} key={item._id}>
               <label htmlFor={item._id} style={{ display: "unset" }}>
                 <div className="cards col-lg mb-2 mb-lg-0">
