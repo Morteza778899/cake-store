@@ -47,7 +47,7 @@ const Login = () => {
         toastUpdate(load, "error", "اعتبار سنجی فیلد ها رعایت نشده");
       }
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err.response);
       toastUpdate(load, "error", err.response.data.message);
     }
   };

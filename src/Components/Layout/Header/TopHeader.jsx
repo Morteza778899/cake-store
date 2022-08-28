@@ -123,20 +123,9 @@ const TopHeader = () => {
                       </NavLink>
                     </>
                   )}
-                  <span className="text-white mx-1">|</span>
-                  <NavLink
-                    to="/profile"
-                    className="user-name text-decoration-none"
-                  >
-                    {user.fullname}
-                  </NavLink>
                 </>
               ) : (
                 <>
-                  <NavLink to="/register" className="log text-decoration-none">
-                    ثبت نام
-                  </NavLink>
-                  <span className="text-white mx-1">|</span>
                   <NavLink
                     to="/login"
                     className="user-name text-decoration-none"

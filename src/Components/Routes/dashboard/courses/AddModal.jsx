@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { InputLabel, MenuItem, Select } from "@mui/material";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import SimpleReactValidator from "simple-react-validator";
 import styled from "styled-components";
 import { addCourse } from "../../../../Redux/Action/courseAction";
+import { addCourseService } from "../../../../services/courseService";
 import { toastUpdate } from "../../../utils/toast";
 
 const Div = styled.div`
@@ -25,28 +28,55 @@ const Div = styled.div`
 
 const AddModal = ({ AddModalHandler }) => {
   const [title, setTitle] = useState();
+  const [teacher, setTeacher] = useState();
   const [price, setPrice] = useState();
-  const [info, setInfo] = useState();
+  const [level, setLevel] = useState();
+  const [body, setBody] = useState();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const validator = useRef(
+    new SimpleReactValidator({
+      messages: {
+        required: "پر کردن این فیلد الزامی میباشد",
+        min: "کمتر از 8 کاراکتر نباید باشد",
+        max: "بیشتر از 100 کاراکتر نباید باشد",
+      },
+      element: (message) => (
+        <div style={{ color: "red" }} className="form-text">
+          {message}
+        </div>
+      ),
+    })
+  );
+  const [, forceUpdate] = useState();
 
   const formHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
     const tos = toast.loading("در حال بارگذاری اطلاعات");
     try {
-      let data = new FormData();
-      data.append("title", title);
-      data.append("price", Number.parseInt(price));
-      data.append("imageUrl", e.target.imageUrl.files[0]);
-      data.append("info", info);
-      await dispatch(addCourse(data));
-      AddModalHandler(false);
-      setLoading(false);
-      toastUpdate(tos, "success", "دوره با موفقیت اضافه شد");
-    } catch (error) {
-      console.log(error);
-      toastUpdate(tos, "error", "دوره اضافه نشد");
+      if (validator.current.allValid()) {
+        let course = new FormData();
+        course.append("title", title);
+        course.append("teacher", teacher);
+        course.append("level", level);
+        course.append("price", Number.parseInt(price));
+        course.append("image", e.target.image.files[0]);
+        course.append("body", body);
+        const { data } = await addCourseService(course);
+        await dispatch(addCourse(data.courses));
+        AddModalHandler(false);
+        setLoading(false);
+        toastUpdate(tos, "success", data.message);
+      } else {
+        validator.current.showMessages();
+        forceUpdate(1);
+        setLoading(false);
+        toastUpdate(tos, "error", "اطلاعات وارد شده نامعتبر است");
+      }
+    } catch (err) {
+      toastUpdate(tos, "error", err.response.data.message);
       setLoading(false);
     }
   };
@@ -59,28 +89,79 @@ const AddModal = ({ AddModalHandler }) => {
             type="text"
             name="tilte"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              validator.current.showMessageFor("tilte");
+            }}
             placeholder="عنوان دوره"
             className="form-control my-1"
           />
+          {validator.current.message("tilte", title, "required|min:8|max:100")}
+
+          <input
+            type="text"
+            name="teacher"
+            value={teacher}
+            onChange={(e) => {
+              setTeacher(e.target.value);
+              validator.current.showMessageFor("teacher");
+            }}
+            placeholder="مدرس دوره"
+            className="form-control my-1"
+          />
+          {validator.current.message("teacher", teacher, "required")}
+
           <input
             type="number"
             name="price"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => {
+              setPrice(e.target.value);
+              validator.current.showMessageFor("price");
+            }}
             placeholder="قیمت دوره"
             className="form-control my-1"
           />
-          <input type="file" name="imageUrl" className="form-control my-1" />
+          {validator.current.message("price", price, "required")}
+
+          <InputLabel id="demo-simple-select-label" sx={{my:1,mt:3}}>سطح دوره</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            name="level"
+            value={level}
+            label="level"
+            fullWidth
+            onChange={(e) => {
+              setLevel(e.target.value);
+              validator.current.showMessageFor("level");
+            }}
+          >
+            <MenuItem value={"elementary"}>مقدماتی</MenuItem>
+            <MenuItem value={"medium"}>متوسط</MenuItem>
+            <MenuItem value={"professional"}>پیشرفته</MenuItem>
+          </Select>
+          {validator.current.message("level", level, "required")}
+
+          <input type="file" name="image" className="form-control my-1" />
+
           <textarea
-            name="info"
+            name="body"
             className="form-control my-1"
-            onChange={(e) => setInfo(e.target.value)}
-            value={info}
+            value={body}
+            onChange={(e) => {
+              setBody(e.target.value);
+              validator.current.showMessageFor("body");
+            }}
             placeholder="توضیحات مربوطه ی درباره ی دوره"
             rows="10"
           ></textarea>
-          <button type="submit" className={`btn btn-success m-2 ${loading && "disabled"}`}>
+          {validator.current.message("body", body, "required")}
+
+          <button
+            type="submit"
+            className={`btn btn-success m-2 ${loading && "disabled"}`}
+          >
             ساخت دوره
           </button>
           <button

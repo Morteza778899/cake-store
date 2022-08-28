@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -15,21 +16,29 @@ height: 100%;
         margin-top: -20px;
       }
     }
-    span.icon-graduation-cap {
+    span.icon {
       font-size: 90px;
     }
   }
 `;
 
 const Dashboard = () => {
+  const courses = useSelector((state) => state.courses);
   return (
     <Div>
       <div className="row bg-info mx-auto my-4">
         <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-          <p className="courses-counter m-0">22</p>
+          <p className="courses-counter m-0">{courses.length}</p>
           <p className="text">تعداد دوره ها</p>
         </div>
-        <span className="icon-graduation-cap col-6 text-center my-auto"></span>
+        <span className="icon icon-graduation-cap col-6 text-center my-auto"></span>
+      </div>
+      <div className="row bg-info mx-auto my-4">
+        <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+          <p className="courses-counter m-0">nun</p>
+          <p className="text">تعداد کاربران ها</p>
+        </div>
+        <span className="icon icon-person col-6 text-center my-auto"></span>
       </div>
     </Div>
   );

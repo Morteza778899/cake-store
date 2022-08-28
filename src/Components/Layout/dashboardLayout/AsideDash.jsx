@@ -11,6 +11,7 @@ const Nav = styled.nav`
     direction: rtl;
     li {
       border-bottom: 1px solid #eaeff42d;
+      color: white;
       a {
         display: block;
         width: 100%;
@@ -18,14 +19,15 @@ const Nav = styled.nav`
         padding-inline: 10px;
         padding: 15px;
         text-decoration: none;
-        color: white;
         opacity: 0.5;
         &.main {
-          ${(props) => props.location == "/dashboard" && "opacity: 1; background-color: #111111;"}
+          ${(props) =>
+            props.location == "/dashboard" &&
+            "opacity: 1; background-color: #6d6d6d;"}
         }
         &.active:not(.main) {
           opacity: 1;
-          background-color: #111111;
+          background-color: #6d6d6d;
         }
       }
     }

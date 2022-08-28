@@ -13,9 +13,20 @@ const CoursesDash = () => {
   const courses = useSelector((state) => state.courses);
   const [search, setSearch] = useState("");
   const [filterCourses, setFilterCourses] = useState(courses);
+  const [sortStatus, setSortStatus] = useState("");
+
+  useEffect(() => {
+    setFilterCourses(courses);
+  }, [courses]);
+
   const searchHandler = (text) => {
     setSearch(text);
   };
+
+  const sortHandler = (value) => {
+    setSortStatus(value);
+  };
+
   useEffect(() => {
     let filter = courses.filter((course) => course.title.includes(search));
     setCurrentPage(1); // با هر بار تغییر اینپوت بره به صفحه ی اول جستجو
@@ -30,10 +41,6 @@ const CoursesDash = () => {
     }
   }, [search]);
 
-  const [sortStatus, setSortStatus] = useState("");
-  const sortHandler = (value) => {
-    setSortStatus(value);
-  };
   useEffect(() => {
     if (sortStatus === "asc") {
       let sorted = orderBy(filterCourses, "price", "asc");
@@ -42,12 +49,15 @@ const CoursesDash = () => {
       let sorted = orderBy(filterCourses, "price", "desc");
       setFilterCourses(sorted);
     }
-  }, [sortStatus]);
+  }, [filterCourses, sortStatus]);
 
   // در اینجا تعداد آیتم در هر صفحه 10 میباشد
   //  که میتوان همه ی 10 های پایین را به هر عدد داخواهی تغییر داد
   const [currentPage, setCurrentPage] = useState(1);
-  let arrayX8 = filterCourses.filter((value, index) => index >= (currentPage - 1) * 5 && index <= currentPage * 5 - 1);
+  let arrayX8 = filterCourses.filter(
+    (value, index) =>
+      index >= (currentPage - 1) * 5 && index <= currentPage * 5 - 1
+  );
   let countPage = Math.ceil(filterCourses.length / 5);
   const pageHandler = (num) => {
     setCurrentPage(num);
@@ -61,9 +71,20 @@ const CoursesDash = () => {
   return (
     <Div>
       {showAddModal && <AddModal AddModalHandler={AddModalHandler} />}
-      <SearchAdd AddModalHandler={AddModalHandler} searchHandler={searchHandler} />
-      <Table arrayX8={arrayX8} sortHandler={sortHandler} sortStatus={sortStatus} />
-      <Paginat countPage={countPage} currentPage={currentPage} pageHandler={pageHandler} />
+      <SearchAdd
+        AddModalHandler={AddModalHandler}
+        searchHandler={searchHandler}
+      />
+      <Table
+        arrayX8={arrayX8}
+        sortHandler={sortHandler}
+        sortStatus={sortStatus}
+      />
+      <Paginat
+        countPage={countPage}
+        currentPage={currentPage}
+        pageHandler={pageHandler}
+      />
     </Div>
   );
 };

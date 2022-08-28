@@ -66,30 +66,48 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
     dispatch(deleteCourse(id));
   };
 
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [course, setCourse] = useState(false);
-  const UpdateModalHandler = (bool, course) => {
-    setShowUpdateModal(bool);
-    setCourse(course);
+  // const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [course, setCourse] = useState({});
+  const [open, setOpen] = useState(false);
+
+  const UpdateModalHandler = (bool) => {
+    setOpen(bool);
   };
+
 
   return (
     <Div className="container" sortStatus={sortStatus}>
-      {showUpdateModal && <EditModal UpdateModalHandler={UpdateModalHandler} course={course} />}
+      
 
       <div className="table-container">
         <table className="table table-striped table-hover mx-auto" dir="rtl">
           <thead>
             <tr>
-              <th style={{ width: "300px", maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis" }}>
+              <th
+                style={{
+                  width: "300px",
+                  maxWidth: "300px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
                 عنوان دوره
               </th>
               <th style={{ width: "fit-content" }}>تصویر دوره</th>
-              <th style={{ width: "fit-content", paddingInline: "30px" }} className="d-flex">
+              <th
+                style={{ width: "fit-content", paddingInline: "30px" }}
+                className="d-flex"
+              >
                 قیمت دوره (تومان)
                 <div className="d-flex flex-column">
-                  <span className="icon-arrow_drop_up up" onClick={() => sortHandler("asc")}></span>
-                  <span className="icon-arrow_drop_down down" onClick={() => sortHandler("des")}></span>
+                  <span
+                    className="icon-arrow_drop_up up"
+                    onClick={() => sortHandler("asc")}
+                  ></span>
+                  <span
+                    className="icon-arrow_drop_down down"
+                    onClick={() => sortHandler("des")}
+                  ></span>
                 </div>
               </th>
               <th style={{ width: "fit-content" }}>ویرایش</th>
@@ -98,31 +116,47 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
           </thead>
           <tbody>
             {arrayX8.map((item) => (
+              <>
               <tr key={item._id}>
-                <td style={{ maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                <td
+                  style={{
+                    maxWidth: "300px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
                   {item.title}
                 </td>
                 <td>
                   <a
                     className="btn btn-primary"
                     target="_blank"
-                    href={`https://toplearnapi.ghorbany.dev/${item.imageUrl}`}
+                    href={item.image.imageLink} rel="noreferrer"
                   >
                     نمایش عکس
                   </a>
                 </td>
-                <td>{item.price}</td>
+                <td style={{ textAlign: "center" }}>{item.price}</td>
                 <td>
-                  <button className="btn btn-warning" onClick={() => UpdateModalHandler(true, item)}>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => UpdateModalHandler(true, item)}
+                  >
                     ویرایش
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-danger" onClick={() => deleteHandler(item._id)}>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteHandler(item._id)}
+                  >
                     حذف
                   </button>
                 </td>
               </tr>
+        <EditModal UpdateModalHandler={UpdateModalHandler} course={item} open={open}/>
+</>
             ))}
           </tbody>
         </table>

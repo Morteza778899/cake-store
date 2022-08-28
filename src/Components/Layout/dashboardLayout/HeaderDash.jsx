@@ -56,7 +56,7 @@ const HeaderDash = () => {
 
   return (
     <Header className="d-flex justify-content-between flex-row-reverse px-5 py-2 bg-dark">
-      <h4 className="text-white-50 align-self-center m-0">سایت فروشگاهی</h4>
+      <h4 className="text-white-50 align-self-center m-0">پنل مدیریت سایت</h4>
       <div className="dropdown">
         <div className="d-flex align-items-center">
           <span className="icon-arrow_drop_down text-white-50 "></span>
