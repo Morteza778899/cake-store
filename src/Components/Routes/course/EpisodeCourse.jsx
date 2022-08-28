@@ -12,7 +12,6 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { useState } from "react";
 import axios from "axios";
 import Plyr from "plyr-react";
-import "plyr-react/plyr.css";
 
 const EpisodeCourse = () => {
   const arr = [
