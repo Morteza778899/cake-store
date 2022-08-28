@@ -69,16 +69,22 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
   // const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [course, setCourse] = useState({});
   const [open, setOpen] = useState(false);
+  const [item, setItem] = useState({});
 
-  const UpdateModalHandler = (bool) => {
+  const UpdateModalHandler = (bool, item) => {
+    setItem(item);
     setOpen(bool);
   };
 
-
   return (
     <Div className="container" sortStatus={sortStatus}>
-      
-
+      {open && (
+        <EditModal
+          UpdateModalHandler={UpdateModalHandler}
+          course={item}
+          open={open}
+        />
+      )}
       <div className="table-container">
         <table className="table table-striped table-hover mx-auto" dir="rtl">
           <thead>
@@ -117,46 +123,46 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
           <tbody>
             {arrayX8.map((item) => (
               <>
-              <tr key={item._id}>
-                <td
-                  style={{
-                    maxWidth: "300px",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.title}
-                </td>
-                <td>
-                  <a
-                    className="btn btn-primary"
-                    target="_blank"
-                    href={item.image.imageLink} rel="noreferrer"
+                <tr key={item._id}>
+                  <td
+                    style={{
+                      maxWidth: "300px",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
                   >
-                    نمایش عکس
-                  </a>
-                </td>
-                <td style={{ textAlign: "center" }}>{item.price}</td>
-                <td>
-                  <button
-                    className="btn btn-warning"
-                    onClick={() => UpdateModalHandler(true, item)}
-                  >
-                    ویرایش
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteHandler(item._id)}
-                  >
-                    حذف
-                  </button>
-                </td>
-              </tr>
-        <EditModal UpdateModalHandler={UpdateModalHandler} course={item} open={open}/>
-</>
+                    {item.title}
+                  </td>
+                  <td>
+                    <a
+                      className="btn btn-primary"
+                      target="_blank"
+                      href={item.image.imageLink}
+                      rel="noreferrer"
+                    >
+                      نمایش عکس
+                    </a>
+                  </td>
+                  <td style={{ textAlign: "center" }}>{item.price}</td>
+                  <td>
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => UpdateModalHandler(true, item)}
+                    >
+                      ویرایش
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteHandler(item._id)}
+                    >
+                      حذف
+                    </button>
+                  </td>
+                </tr>
+              </>
             ))}
           </tbody>
         </table>

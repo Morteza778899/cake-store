@@ -25,7 +25,7 @@ const EditModel = ({ UpdateModalHandler, course, open }) => {
   const [body, setBody] = useState(course.body);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
+console.log(course)
   const validator = useRef(
     new SimpleReactValidator({
       messages: {
