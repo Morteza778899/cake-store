@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import config from "../../../services/config.json";
 import EpisodeCourse from "./EpisodeCourse";
@@ -10,10 +11,18 @@ const Div = styled.div`
 `
 
 const ContentCourse = ({course}) => {
+  const [image,setImage]=useState('')
+
+  useEffect(()=>{
+    if(course.image){
+      setImage(course.image.imageLink)
+    }
+  },[])
+
   return (
     <Div className='p-4'>
-      <img src={`${config.toplearnapi}/${course.imageUrl}`} className="w-100 mb-4" alt=''/>
-      <Typography variant='h3' textAlign='center' m={2}>{course.title}</Typography>
+      <img src={image} className="w-100 mb-4" alt=''/>
+      <Typography variant='h4' textAlign='center' my={4} fontWeight={900}>{course.title}</Typography>
       <Typography sx={{p:{xs:0,sm:2},textAlign:'justify'}}>
       {course.info}
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون

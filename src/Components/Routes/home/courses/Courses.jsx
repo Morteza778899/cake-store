@@ -172,7 +172,7 @@ const Courses = () => {
                     <div className="front">
                       <div>
                         <img
-                          src={`${config.toplearnapi}/${item.imageUrl}`}
+                          src={`${item.image.imageLink}`}
                           alt=""
                         />
                         <Button
@@ -192,7 +192,7 @@ const Courses = () => {
                     </div>
                     <div className="back">
                       <h3>{item.title}</h3>
-                      <p>{item.info}</p>
+                      <p>{item.body}</p>
                       <Button
                         variant="contained"
                         onClick={() => navigate(`/course/${item._id}`)}

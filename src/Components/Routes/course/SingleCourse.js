@@ -8,6 +8,7 @@ import ContentCourse from "./ContentCourse";
 import DetailsCourse from "./DetailsCourse";
 import { getSingleCourseService } from "../../../services/courseService";
 import { Box, Grid, Stack, useMediaQuery } from "@mui/material";
+import { toast } from "react-toastify";
 
 const SingleCourse = () => {
   const [loading, setLoading] = useState(false);
@@ -22,14 +23,15 @@ const SingleCourse = () => {
       setLoading(true);
       try {
         const { data } = await getSingleCourseService(params.id);
-        dispatch(getSingleCourse(data.course));
+        dispatch(getSingleCourse(data.data));
         setLoading(false);
       } catch (error) {
-        // در سمت سرور درست بودن آیدی ارسالی باید چک شود
-        // و اگر همچنین آیدی برای دوره ای نبود اینجا ارور ها را هندل کنیم
-        // و از آنجایی که همچین اروری در سرور پیش بینی نشده بود
-        //  خطای 500 میدهد و توست مشکلی از سمت سرور است میاید
-        navigation("/404", { replace: true });
+        if (error.response.status === 404) {
+          toast.error(error.response.data.message);
+          navigation("/404", { replace: true });
+        } else {
+          console.log(error);
+        }
         setLoading(false);
       }
     }
