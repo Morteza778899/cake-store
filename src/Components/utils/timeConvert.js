@@ -4,5 +4,5 @@ export function timeConvert(n) {
   var rhours = Math.floor(hours);
   var minutes = (hours - rhours) * 60;
   var rminutes = Math.round(minutes);
-  return rhours + " : " + rminutes + " : 00 ";
+  return `${rhours<10?'0':''}`+ rhours + " : " + `${rminutes<10?'0':''}`+ rminutes + " : 00 ";
 }

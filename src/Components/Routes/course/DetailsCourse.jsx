@@ -24,6 +24,7 @@ const Div = styled.div`
 `;
 
 const DetailsCourse = ({ course }) => {
+  console.log(course)
   return (
     <Div className="p-4">
       <div className="price-container">

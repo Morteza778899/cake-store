@@ -21,7 +21,8 @@ const MainLayout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       {location.pathname === "/dashboard" ||
-      location.pathname === "/dashboard/courses" ? (
+      location.pathname === "/dashboard/courses" ||
+      location.pathname === "/dashboard/users" ? (
         <Div>
           <DashboardLayout />
           <div className="children">{children}</div>

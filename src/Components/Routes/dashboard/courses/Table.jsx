@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { deleteCourse } from "../../../../Redux/Action/courseAction";
 import { toastUpdate } from "../../../utils/toast";
 import EditModal from "./EditModal";
+import EpisodeModal from "./EpisodeModal";
 
 const Div = styled.div`
   * {
@@ -60,6 +61,7 @@ const Div = styled.div`
     }
   }
 `;
+
 const Table = ({ arrayX8, sortHandler, sortStatus }) => {
   const dispatch = useDispatch();
   const deleteHandler = (id) => {
@@ -67,13 +69,17 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
   };
 
   // const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [course, setCourse] = useState({});
   const [open, setOpen] = useState(false);
+  const [openEP, setOpenEP] = useState(false);
   const [item, setItem] = useState({});
 
   const UpdateModalHandler = (bool, item) => {
     setItem(item);
     setOpen(bool);
+  };
+  const EpisodeModalHandler = (bool, item) => {
+    setItem(item);
+    setOpenEP(bool);
   };
 
   return (
@@ -85,6 +91,16 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
           open={open}
         />
       )}
+
+      {openEP && (
+        <EpisodeModal
+        EpisodeModalHandler={EpisodeModalHandler}
+          course={item}
+          setCourse={setItem}
+          open={openEP}
+        />
+      )}
+
       <div className="table-container">
         <table className="table table-striped table-hover mx-auto" dir="rtl">
           <thead>
@@ -117,12 +133,12 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
                 </div>
               </th>
               <th style={{ width: "fit-content" }}>ویرایش</th>
+              <th style={{ width: "fit-content" }}>قسمت‌های دوره</th>
               <th style={{ width: "fit-content" }}>حذف</th>
             </tr>
           </thead>
           <tbody>
             {arrayX8.map((item) => (
-              <>
                 <tr key={item._id}>
                   <td
                     style={{
@@ -155,6 +171,14 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
                   </td>
                   <td>
                     <button
+                      className="btn btn-secondary"
+                      onClick={() => EpisodeModalHandler(true, item)}
+                    >
+                      قسمت‌ها
+                    </button>
+                  </td>
+                  <td>
+                    <button
                       className="btn btn-danger"
                       onClick={() => deleteHandler(item._id)}
                     >
@@ -162,7 +186,6 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
                     </button>
                   </td>
                 </tr>
-              </>
             ))}
           </tbody>
         </table>

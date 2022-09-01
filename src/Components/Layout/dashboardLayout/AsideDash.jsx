@@ -51,6 +51,12 @@ const AsideDash = () => {
             دوره ها
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/dashboard/users">
+            <span className="icon-graduation-cap mx-1"></span>
+            کاربران
+          </NavLink>
+        </li>
       </ul>
     </Nav>
   );

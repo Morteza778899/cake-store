@@ -11,7 +11,7 @@ import { Box, Grid, Stack, useMediaQuery } from "@mui/material";
 import { toast } from "react-toastify";
 
 const SingleCourse = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const course = useSelector((state) => state.course);
   const params = useParams();
   const dispatch = useDispatch();

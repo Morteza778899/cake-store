@@ -12,12 +12,12 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { useState } from "react";
 import axios from "axios";
 import Plyr from "plyr-react";
+import { getUrlVideoService } from "../../../services/courseService";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const EpisodeCourse = () => {
-  const arr = [
-    { key: "1", name: "1اسم و نام این جلسه" },
-    { key: "2", name: "2اسم و نام این جلسه" },
-  ];
+  const course = useSelector((state) => state.course);
   const [expanded, setExpanded] = useState(false);
   const [url, setUrl] = useState("");
   const smWidth = useMediaQuery("(min-width:600px)");
@@ -50,13 +50,15 @@ const EpisodeCourse = () => {
 
   const handleChange = (panel) => async (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-    // const data = await axios.get(
-    //   `http://localhost:5000/get-video/5mHGyDnPtHM6uesdWbvmpJ_Couple on the beach.mp4`
-    // );
-    // console.log(data)
-    setUrl(
-      "https://cake-store-videos.s3.ir-thr-at1.arvanstorage.com/5mHGyDnPtHM6uesdWbvmpJ_Couple%20on%20the%20beach.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=50dd610c-ecd8-4f51-ae99-18df7c6f3793%2F20220822%2Fdefault%2Fs3%2Faws4_request&X-Amz-Date=20220822T215617Z&X-Amz-Expires=86400&X-Amz-Signature=956aaf47fde809f2fa9ec005beaa69d5f7334b2cf3b1de10842d73d47093591a&X-Amz-SignedHeaders=host&x-amz-user-agent=aws-sdk-js%2F3.150.0&x-id=GetObject"
-    );
+    try {
+      const data = await getUrlVideoService({
+        key: panel,
+        courseId: course._id,
+      });
+      setUrl(data.data.url);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
@@ -67,7 +69,7 @@ const EpisodeCourse = () => {
         },
       }}
     >
-      {arr.map((value, index) => (
+      {course.episode.map((value, index) => (
         <ListItem key={value.key} p={0}>
           <Accordion
             expanded={expanded === value.key}
@@ -83,9 +85,14 @@ const EpisodeCourse = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <PlayCircleIcon color="secondary" fontSize="large" />
+              <Typography sx={{ width: 1, textAlign: "left", p: 1, px: 2 }}>
+                {value.size}
+              </Typography>
+              <Typography sx={{ width: 1, textAlign: "left", p: 1, px: 2 }}>
+                {value.time} دقیقه
+              </Typography>
               <Typography sx={{ width: 1, textAlign: "right", p: 1, px: 2 }}>
-                {value.name}
+                {value.title}
               </Typography>
               <Avatar
                 sx={{
@@ -100,10 +107,14 @@ const EpisodeCourse = () => {
                 </Typography>
               </Avatar>
             </AccordionSummary>
-            <AccordionDetails sx={{'& .plyr__volume':{
-                width: 'fit-content',
-                minWidth:'unset'
-            }}}>
+            <AccordionDetails
+              sx={{
+                "& .plyr__volume": {
+                  width: "fit-content",
+                  minWidth: "unset",
+                },
+              }}
+            >
               <Plyr {...plyrProps} style={{ width: "100%" }} />
             </AccordionDetails>
           </Accordion>

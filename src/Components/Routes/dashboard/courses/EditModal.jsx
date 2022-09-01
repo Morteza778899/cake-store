@@ -10,7 +10,6 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import SimpleReactValidator from "simple-react-validator";
-import styled from "styled-components";
 import { updateCourse } from "../../../../Redux/Action/courseAction";
 import {
   editCourseService,
@@ -25,7 +24,6 @@ const EditModel = ({ UpdateModalHandler, course, open }) => {
   const [body, setBody] = useState(course.body);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-console.log(course)
   const validator = useRef(
     new SimpleReactValidator({
       messages: {
@@ -60,7 +58,7 @@ console.log(course)
         newCourse.append("body", body);
         const { data } = await editCourseService(course._id, newCourse);
         await dispatch(updateCourse(course._id, data.newCourse));
-        UpdateModalHandler(false);
+        UpdateModalHandler(false,course);
         setLoading(false);
         toastUpdate(tos, "success", data.message);
       } else {

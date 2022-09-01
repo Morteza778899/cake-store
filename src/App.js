@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainLayout from "./Components/Layout/MainLayout";
@@ -21,6 +16,7 @@ import NotFound from "./Components/Routes/404/NotFound";
 import Dashboard from "./Components/Routes/dashboard/Dashboard";
 import CoursesDash from "./Components/Routes/dashboard/courses/CoursesDash";
 import { loginUser } from "./services/userService";
+import UsersDash from "./Components/Routes/dashboard/users/UsersDash";
 const App = () => {
   const loading = useSelector((state) => state.loading);
   const user = useSelector((state) => state.user);
@@ -100,6 +96,16 @@ const App = () => {
                   element={
                     user.userId && user.isAdmin ? (
                       <CoursesDash />
+                    ) : (
+                      <Navigate to="/" replace="true" />
+                    )
+                  }
+                />
+                <Route
+                  path="/dashboard/users"
+                  element={
+                    user.userId && user.isAdmin ? (
+                      <UsersDash />
                     ) : (
                       <Navigate to="/" replace="true" />
                     )
