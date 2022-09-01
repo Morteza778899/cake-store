@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SimpleReactValidator from "simple-react-validator";
 import { loginUser } from "../../../services/userService";
@@ -22,7 +22,7 @@ const Login = () => {
         max: "بیشتر از 11 کاراکتر نباید باشد",
       },
       element: (message) => (
-        <div style={{ color: "red" }} className="form-text">
+        <div style={{ color: "red",textAlign:'center',marginTop:"-20px" }} className="form-text">
           {message}
         </div>
       ),
@@ -40,7 +40,8 @@ const Login = () => {
         const decodeToken = jwt.decode(data.token, { complete: true });
         dispatch(setUser(decodeToken.payload.user));
         toastUpdate(load, "success", "ورود موفقیت آمیز بود");
-        navigation("/", { replace: true });
+        navigation(0);  // refresh page for update http request or something 
+        navigation("/", { replace: true ,state:{}});
       } else {
         validator.current.showMessages();
         forceUpdate(1);
@@ -55,7 +56,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>سایت فروشگاهی | ورود به سایت</title>
+        <title>جواد حافظیان | ورود به سایت</title>
       </Helmet>
       <FormLogin
         phone={phone}

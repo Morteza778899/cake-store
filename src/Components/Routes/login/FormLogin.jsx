@@ -1,14 +1,22 @@
+import { Box, Button, Stack, Typography } from "@mui/material";
+
 const FormLogin = ({ phone, setPhone, validator, loginHandler }) => {
   return (
     <main className="client-page">
       <div className="container-content">
         <header>
-          <h2> ورود به سایت </h2>
+          <Typography
+            variant="h3"
+            fontWeight={900}
+            textAlign="center"
+            sx={{ my: 8 }}
+          >
+            ورود به سایت
+          </Typography>
         </header>
-        <div className="form-layer">
-          <form onSubmit={loginHandler} className='mx-5' dir='rtl'>
-
-            <div className="my-2">
+        <div>
+          <form onSubmit={loginHandler} className="px-5" dir="rtl">
+            <Stack direction='column' gap={5}>
               <input
                 type="text"
                 name="phone"
@@ -20,11 +28,23 @@ const FormLogin = ({ phone, setPhone, validator, loginHandler }) => {
                   setPhone(e.target.value);
                   validator.current.showMessageFor("phone");
                 }}
+                style={{ maxWidth: "400px", marginInline: "auto" }}
               />
-              {validator.current.message("phone", phone, "required|min:11|max:11")}
-            </div>
+              {validator.current.message(
+                "phone",
+                phone,
+                "required|min:11|max:11"
+              )}
 
-            <button className="btn btn-success"> ورود به سایت </button>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{ mx: "auto" }}
+              >
+                ورود به سایت
+              </Button>
+            </Stack>
           </form>
         </div>
       </div>

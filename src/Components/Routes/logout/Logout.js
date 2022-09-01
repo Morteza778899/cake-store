@@ -9,6 +9,7 @@ const Logout = () => {
   useEffect(() => {
     localStorage.removeItem("token");
     dispatch(clearUser());
+    navigation(0);  // refresh page for update http request or something 
     navigation("/", { replace: true });
   }, []);
   return null;

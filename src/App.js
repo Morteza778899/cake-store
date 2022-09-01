@@ -17,6 +17,7 @@ import Dashboard from "./Components/Routes/dashboard/Dashboard";
 import CoursesDash from "./Components/Routes/dashboard/courses/CoursesDash";
 import { loginUser } from "./services/userService";
 import UsersDash from "./Components/Routes/dashboard/users/UsersDash";
+
 const App = () => {
   const loading = useSelector((state) => state.loading);
   const user = useSelector((state) => state.user);

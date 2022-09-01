@@ -26,12 +26,12 @@ const HomePage = () => {
   return (
     <div onLoad={locationHandler}>
       <Helmet>
-        <title>سایت آموزشگاهی</title>
+        <title>جواد حافظیان | صفحه اصلی</title>
       </Helmet>
       <main>
         <NavHeader location={location} />
-          <Slider />
-          <Courses />
+        <Slider />
+        <Courses />
         <AboutUs />
       </main>
     </div>

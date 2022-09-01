@@ -31,21 +31,22 @@ const Div = styled.div`
       font-weight: 900;
     }
   }
-  @media (hover: none) {
+  /* @media (hover: none) { */
     input[type="checkbox"]:checked ~ .hover-container {
       transform: rotateY(180deg);
     }
-  }
+  /* } */
   .cards {
+    cursor: pointer;
     height: 300px;
     perspective: 1000px; //با این کد المنت در حال چرخش ارتفاع بیشتری پیدا میکند و قشنگ تر میشود
-    @media (hover: hover) {
+    /* @media (hover: hover) {
       :hover {
         .hover-container {
           transform: rotateY(180deg);
         }
       }
-    }
+    } */
     .hover-container {
       width: 100%;
       height: 100%;

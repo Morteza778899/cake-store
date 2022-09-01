@@ -9,6 +9,7 @@ import DetailsCourse from "./DetailsCourse";
 import { getSingleCourseService } from "../../../services/courseService";
 import { Box, Grid, Stack, useMediaQuery } from "@mui/material";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const SingleCourse = () => {
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,9 @@ const SingleCourse = () => {
 
   return (
     <>
+      <Helmet>
+        <title>جواد حافظیان | دوره</title>
+      </Helmet>
       {loading ? (
         <div
           style={{
