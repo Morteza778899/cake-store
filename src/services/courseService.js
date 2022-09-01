@@ -28,3 +28,7 @@ export const deleteCourseService = id =>{
 export const uploadVideoService = (id,video) =>{
     return http.post(`${config.toplearnapi}/dashboard/upload-video/${id}`,video)
 }
+
+export const deleteVideoService = (data) =>{  // data --> key:filename , courseId
+    return http.put(`${config.toplearnapi}/dashboard/delete-video`,data)
+}

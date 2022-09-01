@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   Avatar,
   Box,
+  Button,
   FormHelperText,
   InputLabel,
   ListItem,
@@ -16,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateCourse } from "../../../../Redux/Action/courseAction";
 import {
+  deleteVideoService,
   getUrlVideoService,
   uploadVideoService,
 } from "../../../../services/courseService";
@@ -101,6 +103,22 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
       setLoading(false);
     }
   };
+
+  const deleteHandler = async(obj)=>{
+    setLoading(true);
+    const tos = toast.loading("در حال بارگذاری اطلاعات");
+    try {
+        const { data } = await deleteVideoService(obj);
+        await dispatch(updateCourse(course._id, data.course));
+        setCourse(data.course);
+        setLoading(false);
+        toastUpdate(tos, "success", data.message);
+    } catch (err) {
+      console.log(err);
+      toastUpdate(tos, "error", err.response.data.message);
+      setLoading(false);
+    }
+  }
 
   const handleChange = (panel) => async (isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -218,6 +236,7 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
+                  <Button variant="contained" onClick={()=>deleteHandler({key:value.key,courseId:course._id})}>حذف</Button>
                   <Typography sx={{ width: 1, textAlign: "left", p: 1, px: 2 }}>
                     {value.size}
                   </Typography>
