@@ -1,4 +1,3 @@
-import styled from "styled-components";
 // Core modules imports are same as usual
 import { Autoplay, EffectCreative, Navigation, Pagination } from "swiper";
 // Direct React component imports
@@ -10,8 +9,10 @@ import "swiper/modules/navigation/navigation.scss"; // Navigation module
 import "swiper/modules/pagination/pagination.scss"; // Pagination module
 import "swiper/modules/effect-creative/effect-creative.scss";
 import "swiper/modules/autoplay/autoplay.scss";
+import { Button, Typography, useMediaQuery } from "@mui/material";
 
 const Slide = ({ changeHandler }) => {
+  const xsWith = useMediaQuery('(max-width:500px)')
   return (
     <Swiper
       modules={[Navigation, EffectCreative, Autoplay]}
@@ -42,7 +43,7 @@ const Slide = ({ changeHandler }) => {
           <div className="h-100 container d-flex justify-content-center align-items-center">
             <div className={`title slide-1-title `}>
               <div>
-                <h2
+                <Typography fontSize={xsWith&&20} variant="h4"
                   className={`mb-0 animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-1s"
@@ -50,30 +51,30 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   دانش خود را پرورش دهید
-                </h2>
+                </Typography>
               </div>
               <div>
-                <h1
+                <Typography fontSize={xsWith&&26} variant="h3"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-1s"
                       : "animate__fadeOutRight"
                   }`}
                 >
-                  دنیای بهترین دانشگاه ها
-                </h1>
+                  دنیای بهترین دانشگاه‌ها
+                </Typography>
               </div>
               <div>
-                <p
+                <Typography fontSize={xsWith&&12} variant="body1"
                   className={`animate__animated  ${
                     isActive
                       ? "animate__fadeInUp animate__delay-2s"
                       : "animate__fadeOutRight"
                   }`}
                 >
-                  ما همیشه بهترین خدمات خود را برای مشتریان خود ارائه می دهیم
-                </p>
-                <p
+                  ما همیشه بهترین خدمات خود را برای مشتریان خود ارائه می‌دهیم
+                </Typography>
+                <Typography fontSize={xsWith&&12} variant="body1"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-2s"
@@ -81,10 +82,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   و همیشه سعی در جلب اعتماد و رضایت مشتریان خود داریم.
-                </p>
+                </Typography>
               </div>
               <div>
-                <button
+                <Button
                   className={`animate__animated  ${
                     isActive
                       ? "animate__fadeInUp animate__delay-3s"
@@ -92,7 +93,7 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   درخواست
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -104,7 +105,7 @@ const Slide = ({ changeHandler }) => {
           <div className="h-100 container d-flex justify-content-end align-items-center">
             <div className={`title slide-2-title `}>
               <div>
-                <h2
+                <Typography variant="h1"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-1s"
@@ -114,10 +115,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   تحصیلات
-                </h2>
+                </Typography>
               </div>
               <div>
-                <h3
+                <Typography fontSize={xsWith&&22} variant="h4"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-1s"
@@ -127,10 +128,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   آموزش و تحصیلات برای همه
-                </h3>
+                </Typography>
               </div>
               <div>
-                <p
+                <Typography fontSize={xsWith&&12} variant="body1"
                   className={`animate__animated  ${
                     isActive
                       ? "animate__fadeInUp animate__delay-2s"
@@ -140,8 +141,8 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   ما همیشه بهترین خدمات خود را برای مشتریان خود ارائه می دهیم
-                </p>
-                <p
+                </Typography>
+                <Typography fontSize={xsWith&&12} variant="body1"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-2s"
@@ -151,10 +152,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   و همیشه سعی در جلب اعتماد و رضایت مشتریان خود داریم.
-                </p>
+                </Typography>
               </div>
               <div>
-                <button
+                <Button
                   className={`animate__animated  ${
                     isActive
                       ? "animate__fadeInUp animate__delay-3s"
@@ -162,7 +163,7 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   تماشای جزئیات
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -174,7 +175,7 @@ const Slide = ({ changeHandler }) => {
           <div className="h-100 container d-flex justify-content-start align-items-center">
             <div className={`title slide-3-title`}>
               <div>
-                <h2
+                <Typography variant="h3"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-1s"
@@ -182,10 +183,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   بهترین تحصیلات
-                </h2>
+                </Typography>
               </div>
               <div>
-                <h3
+                <Typography variant="h5"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-1s"
@@ -193,10 +194,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   برای آینده بهتر خودت
-                </h3>
+                </Typography>
               </div>
               <div>
-                <p
+                <Typography fontSize={xsWith&&12} variant="body1"
                   className={`animate__animated  ${
                     isActive
                       ? "animate__fadeInUp animate__delay-2s"
@@ -204,8 +205,8 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   ما همیشه بهترین خدمات خود را برای مشتریان خود ارائه می دهیم
-                </p>
-                <p
+                </Typography>
+                <Typography fontSize={xsWith&&12} variant="body1"
                   className={`animate__animated ${
                     isActive
                       ? "animate__fadeInUp animate__delay-2s"
@@ -213,10 +214,10 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   و همیشه سعی در جلب اعتماد و رضایت مشتریان خود داریم.
-                </p>
+                </Typography>
               </div>
               <div>
-                <button
+                <Button
                   className={`animate__animated  ${
                     isActive
                       ? "animate__fadeInUp animate__delay-3s"
@@ -224,7 +225,7 @@ const Slide = ({ changeHandler }) => {
                   }`}
                 >
                   درخواست
-                </button>
+                </Button>
               </div>
             </div>
           </div>

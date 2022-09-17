@@ -5,50 +5,27 @@ import {
   Avatar,
   List,
   ListItem,
+  Stack,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { useState } from "react";
-import axios from "axios";
-import Plyr from "plyr-react";
 import { getUrlVideoService } from "../../../services/courseService";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import EpisodePlyr from "./EpisodePlyr";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const EpisodeCourse = () => {
   const course = useSelector((state) => state.course);
   const [expanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState({ status: true, message: '' });
   const [url, setUrl] = useState("");
-  const smWidth = useMediaQuery("(min-width:600px)");
 
-  const plyrProps = {
-    source: {
-      type: "video",
-      sources: [
-        {
-          src: url,
-          type: "video/mp4",
-        },
-      ],
-    },
-    options: {
-      controls: [
-        "play-large",
-        "play",
-        "progress",
-        smWidth && "current-time",
-        smWidth && "volume",
-        smWidth && "settings",
-        "mute",
-        "pip",
-        "airplay",
-        "fullscreen",
-      ],
-    },
-  };
+
 
   const handleChange = (panel) => async (event, isExpanded) => {
+    setLoading(true)
     setExpanded(isExpanded ? panel : false);
     try {
       const data = await getUrlVideoService({
@@ -56,11 +33,13 @@ const EpisodeCourse = () => {
         courseId: course._id,
       });
       setUrl(data.data.url);
+      setResult({ status: true, message: '' })
+      setLoading(false)
     } catch (error) {
-      toast.error(error.response.data.message);
+      setResult({ status: false, message: error.response.data.message })
+      setLoading(false)
     }
   };
-
   return (
     <List
       sx={{
@@ -85,9 +64,7 @@ const EpisodeCourse = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography sx={{ width: 1, textAlign: "left", p: 1, px: 2 }}>
-                {value.size}
-              </Typography>
+              <PlayCircleIcon color="secondary" fontSize="large" />
               <Typography sx={{ width: 1, textAlign: "left", p: 1, px: 2 }}>
                 {value.time} دقیقه
               </Typography>
@@ -115,7 +92,19 @@ const EpisodeCourse = () => {
                 },
               }}
             >
-              <Plyr {...plyrProps} style={{ width: "100%" }} />
+              {
+                loading ? (
+                  <Stack justifyContent='center'>
+                    <ClipLoader color="#f2184f" />
+                  </Stack>
+                ) : result.status ? (
+                  <EpisodePlyr url={url} />
+                ) : (
+                  <Stack justifyContent='center' color='red'>
+                    <Typography>{result.message}</Typography>
+                  </Stack>
+                )
+              }
             </AccordionDetails>
           </Accordion>
         </ListItem>

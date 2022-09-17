@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Sticky from "react-sticky-el";
 import {
@@ -61,13 +61,13 @@ const Div = styled.div`
 const NavHeader = ({ location }) => {
   const [open, setOpen] = useState(false);
   const smWidth = useMediaQuery("(min-width:600px)");
-  
+
   const openHandler = (bool) => {
     setOpen(bool);
   };
 
   return (
-    <Sticky stickyStyle={{ zIndex: "1000" }} mode={"top"}>
+    <Box sx={{ position: 'sticky', top: -1, zIndex: 1000 }}>
       <Div open={open}>
         {smWidth ? (
           <Box sx={{ py: 2.5 }}>
@@ -100,7 +100,7 @@ const NavHeader = ({ location }) => {
           </Accordion>
         )}
       </Div>
-    </Sticky>
+    </Box>
   );
 };
 export default NavHeader;

@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import DashboardLayout from "./dashboardLayout/DashboardLayout";
@@ -28,11 +28,11 @@ const MainLayout = ({ children }) => {
           <div className="children">{children}</div>
         </Div>
       ) : (
-        <>
+        <Box sx={{position:'relative'}}>
           <Header />
           {children}
           <Footer />
-        </>
+        </Box>
       )}
     </ThemeProvider>
   );

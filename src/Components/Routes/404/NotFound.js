@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
+  
+  useEffect(()=>{
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  },[])
+
   return (
     <>
       <div class="d-flex align-items-center justify-content-center">

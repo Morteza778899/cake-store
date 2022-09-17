@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import { timeConvert } from "../../utils/timeConvert";
 const Div = styled.div`
@@ -55,7 +56,7 @@ const DetailsCourse = ({ course }) => {
           {course.level === "professional" && <p>پیشرفته</p>}
         </div>
       </div>
-      <button className="btn w-100">ثـبتـــــــــــ نـــام در دوره</button>
+      <button className="btn w-100" onClick={()=>toast.error('جهت ثبت‌نام در دوره با پشتیبانی در ارتباط باشید')}>ثـبتـــــــــــ نـــام در دوره</button>
     </Div>
   );
 };

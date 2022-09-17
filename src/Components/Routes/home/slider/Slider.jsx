@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Slide from "./Slide";
 import image1 from "../../../../images/bg2.jpg";
@@ -11,9 +11,10 @@ import Progress from "./Progress";
 
 const Div = styled.div`
   position: relative;
-  width: 100%;
+  /* width: 100%; */
   height: 65vw;
-  max-height: 620px;
+  min-height: 450px;
+  max-height: 700px;
   /* overflow: hidden; */
   .swiper {
     width: 100%;
@@ -67,12 +68,8 @@ const Div = styled.div`
           div {
             overflow: hidden;
           }
-          h2 {
-            @media screen and (min-width: 1300px) {
-                font-size: 28px;
-            }
+          h4 {
             background-color: #00000099;
-            font-size: 2.6vw;
             padding: 5px;
             padding-inline: 20px;
             margin-inline: 5px;
@@ -80,11 +77,7 @@ const Div = styled.div`
             border-radius: 30px;
             box-shadow: -4px 0px #f2184f, 4px 0px #f2184f;
           }
-          h1 {
-            @media screen and (min-width: 1300px) {
-                font-size: 48px;
-            }
-            font-size: 4vw;
+          h3 {
             margin: 10px;
             padding: 5px;
             padding-inline: 30px;
@@ -92,18 +85,10 @@ const Div = styled.div`
             border-radius: 40px;
           }
           p {
-            @media screen and (min-width: 1300px) {
-                font-size: 22px;
-            }
-            font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
-            @media screen and (min-width: 1300px) {
-                font-size: 18px;
-            }
-            font-size: 1.8vw;
             padding: 3px;
             padding-inline: 15px;
             margin: 10px;
@@ -124,21 +109,13 @@ const Div = styled.div`
             overflow: hidden;
             display: grid;
           }
-          h2 {
-            @media screen and (min-width: 1300px) {
-                font-size: 100px;
-            }
-            font-size: 8vw;
+          h1 {
             direction: ltr;
             margin-bottom: 0px;
           }
-          h3 {
-            @media screen and (min-width: 1300px) {
-                font-size: 35px;
-            }
+          h4 {
             justify-self: left;
             align-self: center;
-            font-size: 3vw;
             direction: ltr;
             background-color: #202c45c8;
             width: fit-content;
@@ -148,21 +125,13 @@ const Div = styled.div`
             margin-bottom: 10px;
           }
           p {
-            @media screen and (min-width: 1300px) {
-                font-size: 22px;
-            }
-            font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
-            @media screen and (min-width: 1300px) {
-                font-size: 18px;
-            }
             width: fit-content;
             justify-self: left;
             align-self: center;
-            font-size: 1.8vw;
             margin-top: 10px;
             background-color: #202c45c8;
             border: none;
@@ -184,21 +153,13 @@ const Div = styled.div`
           div {
             overflow: hidden;
           }
-          h2 {
-            @media screen and (min-width: 1300px) {
-                font-size: 64px;
-            }
-            font-size: 5vw;
+          h3 {
             background-color: #202c45c8;
             margin-bottom: 5px;
             padding-inline: 20px;
             border-right: 5px solid #f2184f;
           }
-          h3 {
-            @media screen and (min-width: 1300px) {
-                font-size: 32px;
-            }
-            font-size: 3vw;
+          h5 {
             background-color: #000000a0;
             width: fit-content;
             padding: 5px;
@@ -206,18 +167,10 @@ const Div = styled.div`
             margin-bottom: 5px;
           }
           p {
-            @media screen and (min-width: 1300px) {
-                font-size: 22px;
-            }
-            font-size: 2vw;
             text-align: center;
             margin: 0px;
           }
           button {
-            @media screen and (min-width: 1300px) {
-                font-size: 18px;
-            }
-            font-size: 1.8vw;
             margin-top: 10px;
             background-color: #202c45c8;
             border: none;

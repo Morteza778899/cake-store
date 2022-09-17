@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 
-const themeColor = createTheme({
+var themeColor = createTheme({
   palette: {
     type: "light",
     primary: {
@@ -14,7 +14,7 @@ const themeColor = createTheme({
     },
   },
   typography: {
-    fontFamily: "Parastoo",
+    fontFamily: "IranYekan",
     allVariants: {
       direction: "rtl",
     },
@@ -34,7 +34,7 @@ const themeColor = createTheme({
     },
   },
 });
-
+themeColor = responsiveFontSizes(themeColor)
 export const theme = createTheme(themeColor, {
   components: {
     MuiStack: {
@@ -57,7 +57,7 @@ export const theme = createTheme(themeColor, {
     },
     MuiLink: {
       defaultProps: {
-        fontFamily: "Parastoo",
+        fontFamily: "IranYekan",
         underline: "none",
       },
     },

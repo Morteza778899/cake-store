@@ -5,7 +5,6 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import styled from "styled-components";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Stack } from "@mui/material";
@@ -65,7 +64,6 @@ const Div = styled.div`
   }
 `;
 const TopHeader = () => {
-  const [shopHidden, setShopHidden] = useState(false);
   const user = useSelector((state) => state.user);
   console.log(user);
   return (
