@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Paginat from "../../courses/Paginat";
 import AddModal from "./AddModal";
-import EditModal from "./EditModal";
 import SearchAdd from "./SearchAdd";
 import Table from "./Table";
 

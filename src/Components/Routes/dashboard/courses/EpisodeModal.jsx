@@ -7,6 +7,7 @@ import {
   Button,
   FormHelperText,
   InputLabel,
+  LinearProgress,
   ListItem,
   Modal,
   Typography,
@@ -24,6 +25,7 @@ import {
 import { toastUpdate } from "../../../utils/toast";
 import Plyr from "plyr-react";
 import SimpleReactValidator from "simple-react-validator";
+import LinearProgressWithLabel from "../../../utils/LinearProgressWithLabel";
 
 const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
   const [expanded, setExpanded] = useState(false);
@@ -33,6 +35,7 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
   const [url, setUrl] = useState("");
   const dispatch = useDispatch();
   const smWidth = useMediaQuery("(min-width:600px)");
+  const [progress, setProgress] = useState(0);
 
   const validator = useRef(
     new SimpleReactValidator({
@@ -78,6 +81,7 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
 
   const formHandler = async (e) => {
     e.preventDefault();
+    setProgress(0);
     setLoading(true);
     const tos = toast.loading("در حال بارگذاری اطلاعات");
     try {
@@ -86,33 +90,38 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
         episode.append("title", title);
         episode.append("time", Number.parseInt(time));
         episode.append("video", e.target.video.files[0]);
-        const { data } = await uploadVideoService(course._id, episode);
+        const { data } = await uploadVideoService(course._id, episode, (event) => {
+          setProgress(Math.round((100 * event.loaded) / event.total));
+        });
         await dispatch(updateCourse(course._id, data.course));
         setCourse(data.course);
         setLoading(false);
         toastUpdate(tos, "success", data.message);
+        setProgress(0);
       } else {
+        setProgress(0);
         validator.current.showMessages();
         forceUpdate(1);
         setLoading(false);
         toastUpdate(tos, "error", "اطلاعات وارد شده نامعتبر است");
       }
     } catch (err) {
+      setProgress(0);
       console.log(err);
       toastUpdate(tos, "error", err.response.data.message);
       setLoading(false);
     }
   };
 
-  const deleteHandler = async(obj)=>{
+  const deleteHandler = async (obj) => {
     setLoading(true);
     const tos = toast.loading("در حال بارگذاری اطلاعات");
     try {
-        const { data } = await deleteVideoService(obj);
-        await dispatch(updateCourse(course._id, data.course));
-        setCourse(data.course);
-        setLoading(false);
-        toastUpdate(tos, "success", data.message);
+      const { data } = await deleteVideoService(obj);
+      await dispatch(updateCourse(course._id, data.course));
+      setCourse(data.course);
+      setLoading(false);
+      toastUpdate(tos, "success", data.message);
     } catch (err) {
       console.log(err);
       toastUpdate(tos, "error", err.response.data.message);
@@ -191,7 +200,6 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
               className="form-control my-1"
             />
             {validator.current.message("time", time, "required")}
-
             <InputLabel id="video-label" sx={{ my: 1, mt: 3 }}>
               آپلود فایل ویدیویی
             </InputLabel>
@@ -201,6 +209,7 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
               name="video"
               className="form-control my-1"
             />
+            <LinearProgressWithLabel value={progress}/>
             <FormHelperText sx={{ textAlign: "right", mb: 3 }}>
               فایل ارسالی نباید بیشتر از 400 مگابایت باشد
             </FormHelperText>
@@ -236,7 +245,7 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Button variant="contained" onClick={()=>deleteHandler({key:value.key,courseId:course._id})}>حذف</Button>
+                  <Button variant="contained" onClick={() => deleteHandler({ key: value.key, courseId: course._id })}>حذف</Button>
                   <Typography sx={{ width: 1, textAlign: "left", p: 1, px: 2 }}>
                     {value.size}
                   </Typography>
@@ -279,8 +288,8 @@ const EpisodeModal = ({ EpisodeModalHandler, course, setCourse, open }) => {
             </ListItem>
           ))}
         </Box>
-      </Box>
-    </Modal>
+      </Box >
+    </Modal >
   );
 };
 export default EpisodeModal;
