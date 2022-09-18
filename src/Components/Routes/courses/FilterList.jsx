@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import styled from "styled-components";
 const Div = styled.div`
   box-shadow: 0 0 7px 0 #eaeff4;

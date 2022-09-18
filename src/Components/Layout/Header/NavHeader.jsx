@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Sticky from "react-sticky-el";
 import {
   Accordion,
   AccordionDetails,

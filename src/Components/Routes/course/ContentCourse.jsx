@@ -1,7 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import config from "../../../services/config.json";
 import EpisodeCourse from "./EpisodeCourse";
 
 const Div = styled.div`

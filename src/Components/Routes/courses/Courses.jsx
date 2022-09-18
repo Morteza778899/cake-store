@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -116,7 +116,7 @@ const Courses = () => {
           </div>
         ))}
       </div>
-      <Paginat countPage={countPage} currentPage={currentPage} pageHandler={pageHandler}/>
+      <Paginat countPage={countPage} currentPage={currentPage} pageHandler={pageHandler} />
     </Div>
   );
 };

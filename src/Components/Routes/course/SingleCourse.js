@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSingleCourse } from "../../../Redux/Action/singleCourseAction";
 import ClipLoader from "react-spinners/ClipLoader";
-import styled from "styled-components";
 import ContentCourse from "./ContentCourse";
 import DetailsCourse from "./DetailsCourse";
 import { getSingleCourseService } from "../../../services/courseService";
-import { Box, Grid, Stack, useMediaQuery } from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 

@@ -7,14 +7,13 @@ import {
   Button,
   FormHelperText,
   InputLabel,
-  LinearProgress,
   ListItem,
   Modal,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { updateCourse } from "../../../../Redux/Action/courseAction";
 import {

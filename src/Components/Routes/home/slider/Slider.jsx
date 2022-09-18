@@ -43,7 +43,7 @@ const Div = styled.div`
         position: relative;
         background-image: url(${image1});
         background-size: cover;
-        background-position: center center;
+        background-position: top right;
       }
       :nth-child(2) {
         position: relative;
@@ -55,7 +55,7 @@ const Div = styled.div`
         position: relative;
         background-image: url(${image3});
         background-size: cover;
-        background-position: center center;
+        background-position: top left;
       }
       .title {
         width: fit-content;
@@ -68,7 +68,7 @@ const Div = styled.div`
           div {
             overflow: hidden;
           }
-          h4 {
+          h5 {
             background-color: #00000099;
             padding: 5px;
             padding-inline: 20px;
@@ -77,7 +77,7 @@ const Div = styled.div`
             border-radius: 30px;
             box-shadow: -4px 0px #f2184f, 4px 0px #f2184f;
           }
-          h3 {
+          h4 {
             margin: 10px;
             padding: 5px;
             padding-inline: 30px;
@@ -111,7 +111,6 @@ const Div = styled.div`
           }
           h1 {
             direction: ltr;
-            margin-bottom: 0px;
           }
           h4 {
             justify-self: left;

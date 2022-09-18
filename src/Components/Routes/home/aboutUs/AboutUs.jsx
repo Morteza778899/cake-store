@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ReactVisibilitySensor from "react-visibility-sensor";
 import image from "../../../../images/ab3.jpg";
 

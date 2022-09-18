@@ -1,8 +1,8 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import config from "../../../../services/config.json";
+
 const Div = styled.div`
   margin-top: 60px;
   margin-bottom: 60px;
@@ -39,7 +39,6 @@ const Div = styled.div`
     height: 300px;
     perspective: 1000px; //با این کد المنت در حال چرخش ارتفاع بیشتری پیدا میکند و قشنگ تر میشود
     .hover-container {
-      width: 100%;
       height: 100%;
       display: grid;
       transform-style: preserve-3d;
@@ -86,20 +85,25 @@ const Div = styled.div`
         backface-visibility: hidden;
       }
       .back {
+          width:100% ;
         grid-row: 1/2;
         grid-column: 1/2;
         background-color: #202c45;
         transform: rotateY(180deg);
         h3 {
           margin: 40px;
-          margin-inline: auto;
-          width: 70%;
+          margin-inline: 20px;
           text-align: center;
           font-size: 28px;
           color: #f2194e;
-          white-space: nowrap;
+          display: -webkit-box;
           overflow: hidden;
           text-overflow: ellipsis;
+          -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
+          max-height: 1.8em;
+          line-height: 1.8em;
         }
         p {
           font-size: 14px;
@@ -143,14 +147,14 @@ const Courses = () => {
           <span className="red">جدیدترین</span> <span>دوره‌ها</span>
           <span className="all">برای شرکت در هر دوره روی عکس دوره‌ها کلیک کنید</span>
         </Typography>
-        <Grid container justifyContent='space-around'>
+        <Grid container justifyContent='center'>
           {
             courses.length === 0 && (
               <Typography variant='subtitle1' width={1} textAlign='center'>تاکنون هیچ دوره ای در پایگاه داده ثبت نشده است</Typography>
             )
           }
           {courses.map((item) => (
-            <Grid item xs={12} md={5} p={1} key={item._id}>
+            <Grid item xs={12} sm={9} md={6} lg={4} p={1} key={item._id}>
               <label htmlFor={item._id} style={{ display: "unset" }}>
                 <div className="cards col-lg mb-2 mb-lg-0">
                   <input

@@ -84,7 +84,7 @@ const TopHeader = () => {
                 </a>
               </li>
               <li className="list-inline-item ">
-                <a>
+                <a href="https://instagram.com/javad_hafezian?igshid=YmMyMTA2M2Y=" target='blank'>
                   <InstagramIcon className="media-icon" />
                 </a>
               </li>

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import styled from "styled-components";
 import { deleteCourse } from "../../../../Redux/Action/courseAction";
-import { toastUpdate } from "../../../utils/toast";
 import EditModal from "./EditModal";
 import EpisodeModal from "./EpisodeModal";
 

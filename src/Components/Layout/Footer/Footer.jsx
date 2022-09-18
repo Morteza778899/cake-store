@@ -1,15 +1,13 @@
 import styled from "styled-components";
-
-import image from "../../../images/bg2.jpg";
-
+import image from "../../../images/bg3.jpg";
 import Address from "./top/Address";
 import UsefulLink from "./top/UsefulLink";
 import Twitter from "./top/Twitter";
-
 import { Grid } from "@mui/material";
 
 const FooterStyle = styled.footer`
   background: url(${image});
+  background-position:top center ;
   margin-top: 50px;
   color: white;
   .black-layer {
