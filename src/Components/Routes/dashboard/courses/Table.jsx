@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { deleteCourse } from "../../../../Redux/Action/courseAction";
 import EditModal from "./EditModal";
 import EpisodeModal from "./EpisodeModal";
+import PracticeModal from "./PracticeModal";
 
 const Div = styled.div`
   * {
@@ -69,6 +70,7 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
   // const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [openEP, setOpenEP] = useState(false);
+  const [openPr, setOpenPr] = useState(false);
   const [item, setItem] = useState({});
 
   const UpdateModalHandler = (bool, item) => {
@@ -78,6 +80,10 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
   const EpisodeModalHandler = (bool, item) => {
     setItem(item);
     setOpenEP(bool);
+  };
+  const PracticeModalHandler = (bool, item) => {
+    setItem(item);
+    setOpenPr(bool);
   };
 
   return (
@@ -92,10 +98,19 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
 
       {openEP && (
         <EpisodeModal
-        EpisodeModalHandler={EpisodeModalHandler}
+          EpisodeModalHandler={EpisodeModalHandler}
           course={item}
           setCourse={setItem}
           open={openEP}
+        />
+      )}
+
+      {openPr && (
+        <PracticeModal
+          PracticeModalHandler={PracticeModalHandler}
+          course={item}
+          setCourse={setItem}
+          open={openPr}
         />
       )}
 
@@ -132,58 +147,67 @@ const Table = ({ arrayX8, sortHandler, sortStatus }) => {
               </th>
               <th style={{ width: "fit-content" }}>ویرایش</th>
               <th style={{ width: "fit-content" }}>قسمت‌های دوره</th>
+              <th style={{ width: "fit-content" }}>تمرین</th>
               <th style={{ width: "fit-content" }}>حذف</th>
             </tr>
           </thead>
           <tbody>
             {arrayX8.map((item) => (
-                <tr key={item._id}>
-                  <td
-                    style={{
-                      maxWidth: "300px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
+              <tr key={item._id}>
+                <td
+                  style={{
+                    maxWidth: "300px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item.title}
+                </td>
+                <td>
+                  <a
+                    className="btn btn-primary"
+                    target="_blank"
+                    href={item.image.imageLink}
+                    rel="noreferrer"
                   >
-                    {item.title}
-                  </td>
-                  <td>
-                    <a
-                      className="btn btn-primary"
-                      target="_blank"
-                      href={item.image.imageLink}
-                      rel="noreferrer"
-                    >
-                      نمایش عکس
-                    </a>
-                  </td>
-                  <td style={{ textAlign: "center" }}>{item.price}</td>
-                  <td>
-                    <button
-                      className="btn btn-warning"
-                      onClick={() => UpdateModalHandler(true, item)}
-                    >
-                      ویرایش
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => EpisodeModalHandler(true, item)}
-                    >
-                      قسمت‌ها
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => deleteHandler(item._id)}
-                    >
-                      حذف
-                    </button>
-                  </td>
-                </tr>
+                    نمایش عکس
+                  </a>
+                </td>
+                <td style={{ textAlign: "center" }}>{item.price}</td>
+                <td>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => UpdateModalHandler(true, item)}
+                  >
+                    ویرایش
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => EpisodeModalHandler(true, item)}
+                  >
+                    قسمت‌ها
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => PracticeModalHandler(true, item)}
+                  >
+                    تمرین‌ها
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteHandler(item._id)}
+                  >
+                    حذف
+                  </button>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>

@@ -13,6 +13,10 @@ export const getUrlVideoService = (data)=>{  // data --> key:filename , courseId
     return http.post(`${config.toplearnapi}/get-video`,data)
 }
 
+export const getUrlPracticeService = (data)=>{  // data --> key:filename , courseId
+    return http.post(`${config.toplearnapi}/get-practice`,data)
+}
+
 export const addCourseService = course =>{
     return http.post(`${config.toplearnapi}/dashboard/add-course`,course)
 }
@@ -29,6 +33,14 @@ export const uploadVideoService = (id,video,onUploadProgress) =>{
     return http.post(`${config.toplearnapi}/dashboard/upload-video/${id}`,video,{onUploadProgress})
 }
 
+export const uploadPracticeService = (id,video,onUploadProgress) =>{
+    return http.post(`${config.toplearnapi}/dashboard/upload-practice/${id}`,video,{onUploadProgress})
+}
+
 export const deleteVideoService = (data) =>{  // data --> key:filename , courseId
     return http.put(`${config.toplearnapi}/dashboard/delete-video`,data)
+}
+
+export const deletePracticeService = (data) =>{  // data --> key:filename , courseId
+    return http.put(`${config.toplearnapi}/dashboard/delete-practice`,data)
 }

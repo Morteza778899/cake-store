@@ -16,12 +16,12 @@ const Slide = ({ changeHandler }) => {
   return (
     <Swiper
       modules={[Navigation, EffectCreative, Autoplay]}
-      // autoplay={{
-      //   delay: 6000,
-      //   disableOnInteraction: false,
-      //   waitForTransition: false, //بخاطر این فالس کردم که تشخیص زمانش برای ساخت پراگرس بار بهم میریخت
-      //   // یا حداقل برای این روشی که من نوشتم بهم میریخت
-      // }}
+      autoplay={{
+        delay: 6000,
+        disableOnInteraction: false,
+        waitForTransition: false, //بخاطر این فالس کردم که تشخیص زمانش برای ساخت پراگرس بار بهم میریخت
+        // یا حداقل برای این روشی که من نوشتم بهم میریخت
+      }}
       navigation
       dir="rtl"
       effect={"creative"}
